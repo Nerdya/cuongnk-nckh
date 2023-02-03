@@ -1,25 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
 
 
 
-const routes: Routes = [
-  { path: '',  component: UserComponent }
-];
-
 @NgModule({
+  imports: [
+    UserRoutingModule,
+    SharedModule,
+  ],
   declarations: [
     UserComponent,
     UserHeaderComponent,
     UserFooterComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
+  exports: [
+    UserComponent,
+    UserHeaderComponent,
+    UserFooterComponent,
   ]
 })
 export class UserModule { }
