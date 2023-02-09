@@ -20,7 +20,7 @@ registerLocaleData(vi);
     SharedModule,
   ],
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN }
