@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
-import { UserHeaderComponent } from './user-header/user-header.component';
-import { UserFooterComponent } from './user-footer/user-footer.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/user-footer.component';
 
 
 
@@ -14,13 +14,13 @@ import { UserFooterComponent } from './user-footer/user-footer.component';
   ],
   declarations: [
     UserComponent,
-    UserHeaderComponent,
-    UserFooterComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   exports: [
     UserComponent,
-    UserHeaderComponent,
-    UserFooterComponent,
+    HeaderComponent,
+    FooterComponent,
   ]
 })
 export class UserModule { }
