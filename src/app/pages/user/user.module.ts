@@ -3,7 +3,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { HeaderComponent } from '../../components/header/header.component';
-import { FooterComponent } from '../../components/footer/user-footer.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 
 
