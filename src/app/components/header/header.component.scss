@@ -1,0 +1,45 @@
+.nckh-header {
+  display: flex;
+  background-color: lightgray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+
+  .search-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: darkgray;
+
+    .input-search {
+      width: calc(480px - 32px);
+      height: 32px;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+      border: none;
+    }
+
+    .btn-search {
+      width: 40px;
+      height: 32px;
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+      border: none;
+      background-color: red;
+    }
+  }
+
+  .nav-container {
+    background-color: gray;
+
+    .nav-list {
+      list-style: none;
+    }
+  }
+}
+
+::placeholder {
+  text-align: center;
+}
