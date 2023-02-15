@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../../app/shared/shared.module';
-import { UsersRoutingModule } from './users-routing.module';
+import { CategoriesRoutingModule } from './categories-routing.module';
 
 
 
 @NgModule({
   imports: [
-    UsersRoutingModule,
+    CategoriesRoutingModule,
     SharedModule,
   ],
   declarations: [
@@ -14,4 +14,4 @@ import { UsersRoutingModule } from './users-routing.module';
   exports: [
   ]
 })
-export class UsersModule { }
+export class CategoriesModule { }

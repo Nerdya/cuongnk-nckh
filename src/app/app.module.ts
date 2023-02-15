@@ -25,6 +25,8 @@ registerLocaleData(vi);
   providers: [
     { provide: NZ_I18N, useValue: vi_VN }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
