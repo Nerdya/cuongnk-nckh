@@ -5,7 +5,25 @@ import { AdminComponent } from './admin.component';
 
 
 const routes: Routes = [
-  { path: '',  component: AdminComponent }
+  {
+    path: '',
+    component: AdminComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'categories',
+    component: AdminComponent,
+    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+  },
+  {
+    path: 'users',
+    component: AdminComponent,
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

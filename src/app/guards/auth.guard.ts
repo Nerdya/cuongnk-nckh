@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/auth']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/auth']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }
