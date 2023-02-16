@@ -1,0 +1,95 @@
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-layout {
+  height: 100vh;
+}
+
+nz-header {
+  width: 100%;
+  height: 56px;
+  padding: 0;
+  z-index: 2;
+  background: #cd1818;
+}
+
+.app-header {
+  width: 1200px;
+  height: 56px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+
+  .logo {
+    width: 200px;
+    height: inherit;
+
+    img {
+      width: auto;
+      height: inherit;
+      position: fixed;
+    }
+  }
+
+  .search-bar {
+    width: 496px;
+    display: flex;
+    align-items: center;
+
+    .input-search {
+      width: calc(100% - 58px);
+      height: 38px;
+      border: none;
+      font-size: 14px;
+      padding: 0 16px;
+      background: #fff;
+      border-radius: 2px 0 0 2px;
+      line-height: normal;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .btn-search {
+      width: 58px;
+      height: 38px;
+      display: block;
+      border: none;
+      background: #333;
+      border-radius: 0 2px 2px 0;
+
+      .icon-search {
+        display: block;
+        font-size: 28px;
+        color: white;
+      }
+    }
+
+    ::placeholder {
+      text-align: center;
+    }
+  }
+
+  .nav-container {
+
+    .nav-list {
+      list-style: none;
+    }
+  }
+}
+
+nz-content {
+  margin: 24px;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  height: 100%;
+}
