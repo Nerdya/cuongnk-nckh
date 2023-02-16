@@ -1,7 +1,8 @@
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { APIHelperService } from 'src/app/services/api-helper.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SubscriptionService } from '../../../services/subscription.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,30 +10,41 @@ import { APIHelperService } from 'src/app/services/api-helper.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  validateForm!: UntypedFormGroup;
+  validateForm!: FormGroup;
 
   constructor(
-    private fb: UntypedFormBuilder,
-    private api: APIHelperService,
-    ) {}
+    private fb: FormBuilder,
+    private subscription: SubscriptionService,
+    private authService: AuthService,
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.validateForm = this.fb.group({
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true]
+    });
+  }
 
   submitForm(): void {
-    const body = {
-      "username": "0395663678",
-      "password": "123456Aa"
-    };
-    this.api.post('/authenticate/login', body).subscribe((response: HttpResponse<any>) => {
-      console.log('response', response);
-      if (response.status === 200) {
-        // request was successful with a 200 status code
-        console.log('Request was successful');
-      } else {
-        // request was not successful
-        console.error('Request failed');
-      }
-    });
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+    const form = this.validateForm;
+    if (form.valid) {
+      this.subscription.subscribeToObservable(
+        this.authService.login(form.value.username, form.value.password),
+        (res: HttpResponse<any>) => {
+          if (res.status === 200) {
+            console.log('Request was successful', res);
+          }
+        },
+        (e) => {
+          console.error('Request failed', e);
+          console.error('Error message:', e.error?.message);
+        }
+      );
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -41,13 +53,5 @@ export class LoginComponent implements OnInit {
         }
       });
     }
-  }
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true]
-    });
   }
 }

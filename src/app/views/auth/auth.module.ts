@@ -3,6 +3,7 @@ import { SharedModule } from '../../../app/shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -14,10 +15,12 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     LoginComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
   ]
 })
 export class AuthModule { }
