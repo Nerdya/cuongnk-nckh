@@ -7,9 +7,9 @@ import { UserComponent } from './user.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: UserComponent,
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-    pathMatch: 'full'
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'product',
