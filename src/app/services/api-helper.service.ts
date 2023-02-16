@@ -13,18 +13,18 @@ export class APIHelperService {
   constructor(private http: HttpClient) {}
 
   get(url: string): Observable<any> {
-    return this.http.get(this.apiUrl + url, { headers: this.headers });
+    return this.http.get(this.apiUrl + url, { headers: this.headers, observe: 'response' });
   }
 
   post(url: string, data: any): Observable<any> {
-    return this.http.post(this.apiUrl + url, data, { headers: this.headers });
+    return this.http.post(this.apiUrl + url, data, { headers: this.headers, observe: 'response' });
   }
 
   put(url: string, data: any): Observable<any> {
-    return this.http.put(this.apiUrl + url, data, { headers: this.headers });
+    return this.http.put(this.apiUrl + url, data, { headers: this.headers, observe: 'response' });
   }
 
   delete(url: string): Observable<any> {
-    return this.http.delete(this.apiUrl + url, { headers: this.headers });
+    return this.http.delete(this.apiUrl + url, { headers: this.headers, observe: 'response' });
   }
 }
