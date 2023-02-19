@@ -118,12 +118,9 @@ nz-header {
   }
 }
 
-nz-content {
-  margin: 24px;
-}
-
 .inner-content {
-  padding: 24px;
-  background: #fff;
+  width: 1200px;
   height: 100%;
+  margin: 0 auto;
+  position: relative;
 }
