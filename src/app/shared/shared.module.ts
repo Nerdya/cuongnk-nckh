@@ -10,13 +10,18 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { CategoryCardComponent } from '../components/category-card/category-card.component';
+import { ProductCardComponent } from '../components/product-card/product-card.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
   ],
-  declarations: [],
+  declarations: [
+    CategoryCardComponent,
+    ProductCardComponent,
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -30,6 +35,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzButtonModule,
     NzCheckboxModule,
     NzSelectModule,
+    
+    CategoryCardComponent,
+    ProductCardComponent,
   ]
 })
 export class SharedModule { }
