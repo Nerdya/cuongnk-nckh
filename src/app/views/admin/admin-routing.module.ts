@@ -7,8 +7,8 @@ import { AdminComponent } from './admin.component';
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    component: AdminComponent
   },
   {
     path: 'categories',

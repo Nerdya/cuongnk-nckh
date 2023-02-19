@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../../app/shared/shared.module';
 import { ProductRoutingModule } from './product-routing.module';
+import { ProductComponent } from './product.component';
 
 
 
@@ -10,6 +11,7 @@ import { ProductRoutingModule } from './product-routing.module';
     SharedModule,
   ],
   declarations: [
+    ProductComponent,
   ],
   exports: [
   ]
