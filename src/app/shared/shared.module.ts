@@ -10,17 +10,30 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCardModule } from 'ng-zorro-antd/card';
+
 import { CategoryCardComponent } from '../components/category-card/category-card.component';
-import { ProductCardComponent } from '../components/product-card/product-card.component';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzSelectModule,
+    NzCardModule,
   ],
   declarations: [
     CategoryCardComponent,
-    ProductCardComponent,
   ],
   exports: [
     CommonModule,
@@ -35,9 +48,9 @@ import { ProductCardComponent } from '../components/product-card/product-card.co
     NzButtonModule,
     NzCheckboxModule,
     NzSelectModule,
+    NzCardModule,
     
     CategoryCardComponent,
-    ProductCardComponent,
   ]
 })
 export class SharedModule { }
