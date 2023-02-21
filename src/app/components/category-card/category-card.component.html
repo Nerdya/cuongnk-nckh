@@ -1,1 +1,28 @@
-<p>category-card works!</p>
+<nz-card [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
+  <div nz-card-grid class="card-grid" *ngFor="let item of list">
+    <div class="row">
+      <div class="col-12 mb-2">
+        <img class="item-image" [src]="item.image"/>
+      </div>
+      <div class="col-12 mb-2">
+        {{item.name}}
+      </div>
+      <div class="col-12 mb-2">
+        {{item.price}}
+      </div>
+      <div class="col-8 mb-2">
+        {{item.price}}
+      </div>
+      <div class="col-4 mb-2">
+        {{item.promotion}}
+      </div>
+      <div class="col-12 d-grid gap-2">
+        <button type="button" class="btn btn-primary btn-sm">Xem chi tiết</button>
+        <button type="button" class="btn btn-primary btn-sm">Thêm giỏ hàng</button>
+      </div>
+    </div>
+  </div>
+</nz-card>
+<ng-template #extraTemplate>
+  <a [href]="extraLink">{{extra}}</a>
+</ng-template>

@@ -34,7 +34,8 @@ nz-header {
     img {
       width: auto;
       height: inherit;
-      position: fixed;
+      position: relative;
+      top: -8px;
     }
   }
 
@@ -118,9 +119,25 @@ nz-header {
   }
 }
 
+nz-content {
+  background: #f0f2f5;
+  min-height: auto;
+}
+
 .inner-content {
   width: 1200px;
-  height: 100%;
-  margin: 0 auto;
+  margin: 16px auto;
   position: relative;
+}
+
+nz-footer {
+  width: 100%;
+  padding: 0;
+  background: #fff;
+}
+
+.app-footer {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
 }
