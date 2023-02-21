@@ -13,6 +13,6 @@ export class UserComponent {
   ) {}
 
   login() {
-    this.router.navigate(['auth']);
+    this.router.navigate(['/auth/login']);
   }
 }

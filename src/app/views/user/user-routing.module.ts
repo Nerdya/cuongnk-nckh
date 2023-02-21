@@ -6,8 +6,7 @@ import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
+    path: '../',
     component: UserComponent,
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
@@ -18,8 +17,31 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: '../'
   }
+  // {
+  //   path: '../',
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: UserComponent,
+  //       loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  //     },
+  //     {
+  //       path: 'product',
+  //       component: UserComponent,
+  //       loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
+  //     },
+  //     {
+  //       path: '**',
+  //       redirectTo: ''
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '../'
+  // }
 ];
 
 @NgModule({

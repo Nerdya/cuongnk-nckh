@@ -4,8 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
+    path: 'user',
     loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)
   },
   {
@@ -19,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'user'
   }
 ];
 
