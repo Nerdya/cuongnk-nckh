@@ -1,1 +1,104 @@
-<p>product-detail works!</p>
+<nz-card>
+  <div class="row">
+    <div class="col-4">
+      <div class="row">
+        <div class="img-item-wrapper col-12">
+          <img class="img-item" [src]="product.image"/>
+        </div>
+        <div class="col-12">
+          <div class="d-flex gap-3">
+            <div *ngFor="let image of product.moreImages">
+              <img class="img-item-more" [src]="image"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <hr class="horizontal-spacer mt-4 mb-4">
+        </div>
+        <div class="col-12">
+          <ul>
+            <li>
+              CPU: {{product.processor}}
+            </li>
+            <li>
+              Màn hình: {{product.display}}
+            </li>
+            <li>
+              RAM: {{product.ram}}
+            </li>
+            <li>
+              Đồ họa: {{product.graphics}}
+            </li>
+            <li>
+              Lưu trữ: {{product.storage}}
+            </li>
+            <li>
+              Hệ điều hành: {{product.operatingSystem}}
+            </li>
+            <li>
+              Pin: {{product.battery}}
+            </li>
+            <li>
+              Khối lượng: {{product.weight}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="fw-bold">{{product.name}}</h2>
+        </div>
+        <div class="col-12 mb-4">
+          <h5>
+            Thương hiệu: <span class="text-primary">{{product.brand}}</span>
+            <span class="border-start border-dark ms-5 me-5"></span>
+            SKU: {{product.sku}}
+          </h5>
+        </div>
+        <div class="col-12">
+          <h2 class="fw-bold text-primary">{{product.price}}</h2>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-2">
+              <span class="text-decoration-line-through">{{product.price}}</span>
+            </div>
+            <div class="col-10">
+              <span class="text-primary">{{product.promotion}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <hr class="horizontal-spacer mt-4 mb-4">
+        </div>
+        <div class="col-12">
+          <p>
+            <span class="fs-5">KHUYẾN MÃI ĐÃ NHẬN</span>
+          </p>
+          <p>
+            <span class="fs-2 me-2" nz-icon nzType="gift" nzTheme="twotone" nzTwotoneColor="#cd1818"></span>
+            <span class="fs-5">1x Mã giảm giá cho đơn hàng sau</span>
+          </p>
+          <p>
+            <span class="fs-2 me-2" nz-icon nzType="gift" nzTheme="twotone" nzTwotoneColor="#cd1818"></span>
+            <span class="fs-5">1x Mã giảm giá cho đơn hàng sau</span>
+          </p>
+          <p>
+            <span class="fs-2 me-2" nz-icon nzType="gift" nzTheme="twotone" nzTwotoneColor="#cd1818"></span>
+            <span class="fs-5">1x Bàn phím cơ Acer PREDATOR Aethon 301 TKL USB (Đen)(Quà tặng)</span>
+          </p>
+          <p>
+            <span class="fs-2 me-2" nz-icon nzType="gift" nzTheme="twotone" nzTwotoneColor="#cd1818"></span>
+            <span class="fs-5">1x Ba lô Acer Gaming SUV (Quà tặng)</span>
+          </p>
+        </div>
+        <div class="col-12 d-flex gap-4">
+          <button class="w-100" type="button" class="btn btn-primary">Mua ngay</button>
+          <button class="w-100" type="button" class="btn btn-outline-secondary">Thêm vào giỏ hàng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-card>

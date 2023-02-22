@@ -1,0 +1,23 @@
+nz-card {
+  border-radius: 4px;
+  .img-item-wrapper {
+    margin-bottom: 64px;
+
+    .img-item {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  }
+
+  .img-item-more {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .horizontal-spacer {
+    border-top: 2px dotted #000;
+    background: transparent;
+  }
+}
