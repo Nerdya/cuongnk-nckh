@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../../app/shared/shared.module';
-import { UsersRoutingModule } from './users-routing.module';
-
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../../shared/shared.module';
+import {UsersRoutingModule} from './users-routing.module';
+import {UsersComponent} from "./users.component";
 
 
 @NgModule({
@@ -10,8 +10,9 @@ import { UsersRoutingModule } from './users-routing.module';
     SharedModule,
   ],
   declarations: [
+    UsersComponent,
   ],
-  exports: [
-  ]
+  exports: []
 })
-export class UsersModule { }
+export class UsersModule {
+}

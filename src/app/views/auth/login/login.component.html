@@ -1,20 +1,20 @@
 <div class="nckh-login">
-  <img class="background-img" src="../../../../assets/images/background-laptop.jpg">
+  <img class="background-img" src="../../../../assets/images/background-laptop.jpg" alt="">
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <div class="logo">
-      <img src="../../../../assets/images/logo.svg">
+      <img src="../../../../assets/images/logo.svg" alt="">
     </div>
     <nz-form-item>
       <nz-form-control nzErrorTip="Vui lòng điền tên tài khoản!">
         <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="username" placeholder="Tên tài khoản" />
+          <input type="text" nz-input formControlName="username" placeholder="Tên tài khoản"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Vui lòng điền mật khẩu!">
         <nz-input-group nzPrefixIcon="lock">
-          <input type="password" nz-input formControlName="password" placeholder="Mật khẩu" />
+          <input type="password" nz-input formControlName="password" placeholder="Mật khẩu"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>

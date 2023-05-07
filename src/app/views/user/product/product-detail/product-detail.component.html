@@ -3,12 +3,12 @@
     <div class="col-4">
       <div class="row">
         <div class="img-item-wrapper col-12">
-          <img class="img-item" [src]="product.image"/>
+          <img class="img-item" [src]="product.image" alt=""/>
         </div>
         <div class="col-12">
           <div class="d-flex gap-3">
             <div *ngFor="let image of product.moreImages">
-              <img class="img-item-more" [src]="image"/>
+              <img class="img-item-more" [src]="image" alt=""/>
             </div>
           </div>
         </div>
@@ -108,7 +108,8 @@
               Trả góp 6 tháng lãi suất 0% với đơn hàng >3tr. <a href="/">Xem chi tiết</a>
             </li>
             <li>
-              Nhập mã <b>PV100</b> giảm thêm 5% tối đa <span class="text-primary">100.000đ</span> khi thanh toán qua VNPAY-QR. <a href="/">Xem chi tiết</a>
+              Nhập mã <b>PV100</b> giảm thêm 5% tối đa <span class="text-primary">100.000đ</span> khi thanh toán qua
+              VNPAY-QR. <a href="/">Xem chi tiết</a>
             </li>
           </ul>
         </div>

@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../app/shared/shared.module';
-import { UserRoutingModule } from './user-routing.module';
-import { UserComponent } from './user.component';
-
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../shared/shared.module';
+import {UserRoutingModule} from './user-routing.module';
+import {UserComponent} from './user.component';
 
 
 @NgModule({
@@ -17,4 +16,5 @@ import { UserComponent } from './user.component';
     UserComponent,
   ]
 })
-export class UserModule { }
+export class UserModule {
+}

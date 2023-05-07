@@ -1,8 +1,6 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SubscriptionService } from '../../../services/subscription.service';
-import { AuthService } from '../../../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +12,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private subscription: SubscriptionService,
     private authService: AuthService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -31,27 +29,14 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(): void {
-    const form = this.validateForm;
-    if (form.valid) {
-      this.subscription.subscribeToObservable(
-        this.authService.login(form.value.username, form.value.password),
-        (res: HttpResponse<any>) => {
-          if (res.status === 200) {
-            console.log('Request was successful', res);
-          }
-        },
-        (e) => {
-          console.error('Request failed', e);
-          console.error('Error message:', e.error?.message);
-        }
-      );
-    } else {
+    if (!this.validateForm.valid) {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }
+    console.log('submitForm');
   }
 }

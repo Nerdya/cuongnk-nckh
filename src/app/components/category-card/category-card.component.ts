@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category-card',
@@ -71,7 +71,8 @@ export class CategoryCardComponent {
 
   constructor(
     private router: Router,
-  ) {}
+  ) {
+  }
 
   detail(id: string) {
     this.router.navigate(['/user/product/' + id]);

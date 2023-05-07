@@ -1,13 +1,13 @@
 <div class="nckh-register">
-  <img class="background-img" src="../../../../assets/images/background-laptop.jpg">
+  <img class="background-img" src="../../../../assets/images/background-laptop.jpg" alt="">
   <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
     <div class="logo">
-      <img src="../../../../assets/images/logo.svg">
+      <img src="../../../../assets/images/logo.svg" alt="">
     </div>
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email không hợp lệ!">
-        <input nz-input formControlName="email" id="email" />
+        <input nz-input formControlName="email" id="email"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -25,7 +25,7 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Mật khẩu xác thực</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+        <input nz-input type="password" formControlName="checkPassword" id="checkPassword"/>
         <ng-template #errorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Vui lòng điền mật khẩu xác thực!</ng-container>
           <ng-container *ngIf="control.hasError('confirm')">
@@ -37,7 +37,7 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="fullname" nzRequired>Họ tên</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng điền họ tên!">
-        <input nz-input id="fullname" formControlName="fullname" />
+        <input nz-input id="fullname" formControlName="fullname"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -56,7 +56,7 @@
             </nz-select>
           </ng-template>
         </nz-input-group> -->
-        <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+        <input formControlName="phoneNumber" id="'phoneNumber'" nz-input/>
       </nz-form-control>
     </nz-form-item>
     <!-- <nz-form-item>

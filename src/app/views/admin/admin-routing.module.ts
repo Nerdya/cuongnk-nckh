@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin.component';
-
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AdminComponent} from './admin.component';
 
 
 const routes: Routes = [
@@ -13,12 +12,12 @@ const routes: Routes = [
   {
     path: 'categories',
     component: AdminComponent,
-    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+    loadChildren: () => import('./categories/categories.module').then((m) => m.CategoriesModule)
   },
   {
     path: 'users',
     component: AdminComponent,
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+    loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
   },
   {
     path: '**',
@@ -30,4 +29,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+}

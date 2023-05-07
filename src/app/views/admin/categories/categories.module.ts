@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../../app/shared/shared.module';
-import { CategoriesRoutingModule } from './categories-routing.module';
-
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../../shared/shared.module';
+import {CategoriesRoutingModule} from './categories-routing.module';
+import {CategoriesComponent} from "./categories.component";
 
 
 @NgModule({
@@ -10,8 +10,9 @@ import { CategoriesRoutingModule } from './categories-routing.module';
     SharedModule,
   ],
   declarations: [
+    CategoriesComponent,
   ],
-  exports: [
-  ]
+  exports: []
 })
-export class CategoriesModule { }
+export class CategoriesModule {
+}

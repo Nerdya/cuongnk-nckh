@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  
+
   constructor(
     private router: Router,
-  ) {}
+  ) {
+  }
 
   login() {
     this.router.navigate(['/auth/login']);
