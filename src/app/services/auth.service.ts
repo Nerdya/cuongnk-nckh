@@ -11,8 +11,8 @@ export class AuthService {
   ) {
   }
 
-  isLoggedIn(): boolean {
-    return this.localStorageService.getItem('isLoggedIn') === true;
+  isCurrentUserAdmin(): boolean {
+    const currentUser = this.localStorageService.getItem('currentUser');
+    return currentUser && currentUser.role === 'admin';
   }
-
 }

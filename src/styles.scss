@@ -262,7 +262,7 @@ a {
       list-style: none;
 
       .nav-item {
-        width: 100px;
+        flex: 1;
         height: 100%;
         padding: 0;
         text-align: center;
@@ -313,6 +313,30 @@ a {
     width: 1200px;
     margin: 0 auto;
     display: flex;
+  }
+}
+
+.nckh-home {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.nckh-category-card {
+  nz-card {
+    width: 100%;
+    border-radius: 4px;
+
+    .card-grid {
+      width: 25%;
+      cursor: unset;
+
+      .img-item {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+    }
   }
 }
 
