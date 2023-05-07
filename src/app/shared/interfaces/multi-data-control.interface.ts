@@ -13,7 +13,8 @@ export interface MultiDataControlOptions {
     placeholder?: string,
     control: FormControl,
     dataType: DataTypeEnum,
-    suffixIcon?: string, // STRING
+    prefixIcon?: string, // STRING, PASSWORD
+    suffixIcon?: string, // STRING, PASSWORD
     rows?: number, // TEXTAREA
     hasOptionAll?: boolean, // SELECT_SINGLE
     maxTagCount?: number, // SELECT_MULTIPLE

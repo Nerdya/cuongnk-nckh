@@ -1,90 +1,110 @@
 <div class="multi-data-control">
-    <nz-form-item>
-        <nz-form-control [nzErrorTip]="getErrorMessage">
-            <ng-container [ngSwitch]="true">
-                <ng-container *ngSwitchCase="isString">
-                    <nz-input-group [nzSuffix]="options.suffixIcon ? suffixIcon : ''">
-                        <input nz-input
-                               type="text"
-                               [placeholder]="options.placeholder"
-                               [formControl]="options.control"
-                               (change)="onInputChange($event)"
-                        />
-                    </nz-input-group>
-                    <ng-template #suffixIcon>
-                        <span nz-icon [nzType]="options.suffixIcon ?? ''"></span>
-                    </ng-template>
-                </ng-container>
-                <ng-container *ngSwitchCase="isTextarea">
-                    <textarea nz-input
-                              [rows]="options.rows"
-                              [placeholder]="options.placeholder"
-                              [formControl]="options.control"
-                              (change)="onInputChange($event)"
-                    ></textarea>
-                </ng-container>
-                <ng-container *ngSwitchCase="isNumber">
-                    <input nz-input
-                           type="number"
-                           [placeholder]="options.placeholder"
-                           [formControl]="options.control"
-                    />
-                </ng-container>
-                <ng-container *ngSwitchCase="isDatetime">
-                    <nz-date-picker class="w-100"
-                                    nzAllowClear="false"
-                                    nzFormat="dd-MM-yyyy HH:mm:ss"
-                                    [nzPlaceHolder]="options.placeholder ?? ''"
-                                    nzShowTime
-                                    [formControl]="options.control"
-                    ></nz-date-picker>
-                </ng-container>
-                <ng-container *ngSwitchCase="isDate">
-                    <nz-date-picker class="w-100"
-                                    nzAllowClear="false"
-                                    [nzDisabledDate]="options.disabledDate"
-                                    nzFormat="dd-MM-yyyy"
-                                    [nzPlaceHolder]="options.placeholder ?? ''"
-                                    [formControl]="options.control"
-                                    (ngModelChange)="onDateChange($event)"
-                    ></nz-date-picker>
-                </ng-container>
-                <ng-container *ngSwitchCase="isSelectSingle">
-                    <nz-select nzShowSearch
-                               [nzPlaceHolder]="options.placeholder ?? ''"
-                               [formControl]="options.control"
-                    >
-                        <nz-option *ngIf="options.hasOptionAll"
-                                   nzLabel="Tất cả"
-                                   nzValue=""
-                        ></nz-option>
-                        <nz-option *ngFor="let item of options.list"
-                                   [nzLabel]="item.label"
-                                   [nzValue]="item.value"
-                                   [nzDisabled]="item.disabled"
-                        ></nz-option>
-                    </nz-select>
-                </ng-container>
-                <ng-container *ngSwitchCase="isSelectMultiple">
-                    <nz-select [nzMaxTagCount]="options.maxTagCount ?? 10"
-                               [nzMaxTagPlaceholder]="tagPlaceHolder"
-                               nzMode="multiple"
-                               [nzPlaceHolder]="options.placeholder ?? ''"
-                               [formControl]="options.control"
-                               (ngModelChange)="onSelectMultipleChange($event)"
-                    >
-                        <nz-option *ngFor="let item of options.list"
-                                   [nzLabel]="item.label"
-                                   [nzValue]="item.value"
-                                   [nzDisabled]="item.disabled"
-                        ></nz-option>
-                    </nz-select>
-                    <ng-template #tagPlaceHolder let-selectedList>+{{ selectedList.length }}...</ng-template>
-                </ng-container>
-                <ng-container *ngSwitchDefault>
-                    <span>Unsupported data type</span>
-                </ng-container>
-            </ng-container>
-        </nz-form-control>
-    </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="getErrorMessage">
+      <ng-container [ngSwitch]="true">
+        <ng-container *ngSwitchCase="isString">
+          <ng-template #prefixIcon>
+            <span nz-icon [nzType]="options.prefixIcon ?? ''"></span>
+          </ng-template>
+          <nz-input-group [nzPrefix]="options.prefixIcon ? prefixIcon : ''"
+                          [nzSuffix]="options.suffixIcon ? suffixIcon : ''">
+            <input nz-input
+                   type="text"
+                   [placeholder]="options.placeholder"
+                   [formControl]="options.control"
+                   (change)="onInputChange($event)"
+            />
+          </nz-input-group>
+          <ng-template #suffixIcon>
+            <span nz-icon [nzType]="options.suffixIcon ?? ''"></span>
+          </ng-template>
+        </ng-container>
+        <ng-container *ngSwitchCase="isTextarea">
+          <textarea nz-input
+                    [rows]="options.rows"
+                    [placeholder]="options.placeholder"
+                    [formControl]="options.control"
+                    (change)="onInputChange($event)"
+          ></textarea>
+        </ng-container>
+        <ng-container *ngSwitchCase="isPassword">
+          <ng-template #prefixIcon>
+            <span nz-icon [nzType]="options.prefixIcon ?? ''"></span>
+          </ng-template>
+          <nz-input-group [nzPrefix]="options.prefixIcon ? prefixIcon : ''"
+                          [nzSuffix]="options.suffixIcon ? suffixIcon : ''">
+            <input nz-input
+                   type="password"
+                   [placeholder]="options.placeholder"
+                   [formControl]="options.control"
+            />
+          </nz-input-group>
+          <ng-template #suffixIcon>
+            <span nz-icon [nzType]="options.suffixIcon ?? ''"></span>
+          </ng-template>
+        </ng-container>
+        <ng-container *ngSwitchCase="isNumber">
+          <input nz-input
+                 type="number"
+                 [placeholder]="options.placeholder"
+                 [formControl]="options.control"
+          />
+        </ng-container>
+        <ng-container *ngSwitchCase="isDatetime">
+          <nz-date-picker class="w-100"
+                          nzAllowClear="false"
+                          nzFormat="dd-MM-yyyy HH:mm:ss"
+                          [nzPlaceHolder]="options.placeholder ?? ''"
+                          nzShowTime
+                          [formControl]="options.control"
+          ></nz-date-picker>
+        </ng-container>
+        <ng-container *ngSwitchCase="isDate">
+          <nz-date-picker class="w-100"
+                          nzAllowClear="false"
+                          [nzDisabledDate]="options.disabledDate"
+                          nzFormat="dd-MM-yyyy"
+                          [nzPlaceHolder]="options.placeholder ?? ''"
+                          [formControl]="options.control"
+                          (ngModelChange)="onDateChange($event)"
+          ></nz-date-picker>
+        </ng-container>
+        <ng-container *ngSwitchCase="isSelectSingle">
+          <nz-select nzShowSearch
+                     [nzPlaceHolder]="options.placeholder ?? ''"
+                     [formControl]="options.control"
+          >
+            <nz-option *ngIf="options.hasOptionAll"
+                       nzLabel="Tất cả"
+                       nzValue=""
+            ></nz-option>
+            <nz-option *ngFor="let item of options.list"
+                       [nzLabel]="item.label"
+                       [nzValue]="item.value"
+                       [nzDisabled]="item.disabled"
+            ></nz-option>
+          </nz-select>
+        </ng-container>
+        <ng-container *ngSwitchCase="isSelectMultiple">
+          <nz-select [nzMaxTagCount]="options.maxTagCount ?? 10"
+                     [nzMaxTagPlaceholder]="tagPlaceHolder"
+                     nzMode="multiple"
+                     [nzPlaceHolder]="options.placeholder ?? ''"
+                     [formControl]="options.control"
+                     (ngModelChange)="onSelectMultipleChange($event)"
+          >
+            <nz-option *ngFor="let item of options.list"
+                       [nzLabel]="item.label"
+                       [nzValue]="item.value"
+                       [nzDisabled]="item.disabled"
+            ></nz-option>
+          </nz-select>
+          <ng-template #tagPlaceHolder let-selectedList>+{{ selectedList.length }}...</ng-template>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <span>Unsupported data type</span>
+        </ng-container>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
 </div>

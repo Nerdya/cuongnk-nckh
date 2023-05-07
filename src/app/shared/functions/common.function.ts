@@ -42,3 +42,8 @@ export function convertToCapitalizedSnakeCase(camelCaseString: string): string {
     const snakeCaseString = camelCaseString.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
     return snakeCaseString.charAt(0).toUpperCase() + snakeCaseString.slice(1);
 }
+
+export function removeProperty(obj: any, key: string) {
+  const { [key]: _, ...rest } = obj;
+  return rest;
+}
