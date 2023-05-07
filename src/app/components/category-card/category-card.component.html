@@ -1,28 +1,30 @@
-<nz-card [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
-  <div nz-card-grid class="card-grid" *ngFor="let item of list">
-    <div class="row">
-      <div class="col-12 mb-2">
-        <img class="img-item" [src]="item.image"/>
-      </div>
-      <div class="col-12 mb-2">
-        {{item.name}}
-      </div>
-      <div class="col-12 mb-2">
-        {{item.price}}
-      </div>
-      <div class="col-8 mb-2">
-        {{item.price}}
-      </div>
-      <div class="col-4 mb-2">
-        {{item.promotion}}
-      </div>
-      <div class="col-12 d-grid gap-2">
-        <button type="button" class="btn btn-primary btn-sm" (click)="detail(item.id)">Xem chi tiết</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="addToCart(item.id)">Thêm giỏ hàng</button>
+<div class="nckh-category-card">
+  <nz-card [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
+    <div nz-card-grid class="card-grid" *ngFor="let item of list">
+      <div class="row">
+        <div class="col-12 mb-2">
+          <img class="img-item" [src]="item.image" alt=""/>
+        </div>
+        <div class="col-12 mb-2">
+          {{item.name}}
+        </div>
+        <div class="col-12 mb-2">
+          {{item.price}}
+        </div>
+        <div class="col-8 mb-2">
+          {{item.price}}
+        </div>
+        <div class="col-4 mb-2">
+          {{item.discount}}
+        </div>
+        <div class="col-12 d-grid gap-2">
+          <button type="button" class="btn btn-primary btn-sm" (click)="detail(item.id)">Xem chi tiết</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="addToCart(item.id)">Thêm giỏ hàng</button>
+        </div>
       </div>
     </div>
-  </div>
-</nz-card>
-<ng-template #extraTemplate>
-  <a [href]="extraLink">{{extra}}</a>
-</ng-template>
+  </nz-card>
+  <ng-template #extraTemplate>
+    <a [href]="extraLink">{{extra}}</a>
+  </ng-template>
+</div>

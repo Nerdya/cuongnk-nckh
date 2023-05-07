@@ -94,7 +94,14 @@ export class LoginComponent implements OnInit {
       return false;
     });
     if (valid) {
-      this.router.navigate(['/']);
+      const currentUser = this.localStorageService.getItem('currentUser');
+      switch(currentUser.role) {
+        case 'admin':
+          this.router.navigate(['/admin']);
+          break;
+        default:
+          this.router.navigate(['/']);
+      }
     } else {
       this.loginForm.controls[AKeysEnum.USERNAME].setErrors(null);
       this.loginForm.controls[AKeysEnum.USERNAME].setErrors({notFound: true});

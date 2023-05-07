@@ -1,14 +1,91 @@
-export const statuses = [
-    {value: 'ACTIVE', name: 'ACTIVE'},
-    {value: 'DEACTIVE', name: 'DEACTIVE'}
+export const initialProducts: any[] = [
+  {
+    id: '1',
+    name: 'Laptop ACER Aspire 7 A715-42G-R05G (Ryzen 5 5500U/RAM 8GB/512GB SSD/ Windows 11)',
+    image: '/assets/images/laptop-detail.png',
+    price: '17.990.000 đ',
+    discount: '-12.2%',
+    moreImages: [
+      '/assets/images/laptop-detail-more-image-1.png',
+      '/assets/images/laptop-detail-more-image-2.png',
+      '/assets/images/laptop-detail-more-image-3.png',
+      '/assets/images/laptop-detail-more-image-4.png',
+      '/assets/images/laptop-detail-more-image-5.png',
+      '/assets/images/laptop-detail-more-image-6.png',
+    ],
+    brand: 'Acer',
+    sku: '210901841',
+    category: 'laptop',
+    processor: 'AMD Ryzen 5 5500U',
+    display: '15.6" IPS (1920 x 1080), 144Hz',
+    ram: '8GB DDR4 3200MHz',
+    graphics: 'NVIDIA GeForce RTX 3050 4GB GDDR6 / Intel UHD Graphics',
+    storage: '512GB SSD M.2 NVMe',
+    operatingSystem: 'Windows 11',
+    battery: '4-cell 57Wh Li-ion',
+    weight: '2.2kg',
+  },
+  {
+    id: '2',
+    name: 'Smartphone Samsung Galaxy S21',
+    image: '/assets/images/s21.png',
+    price: '19.990.000 đ',
+    discount: '-10%',
+    moreImages: [
+      '/assets/images/s21-more-image-1.png',
+      '/assets/images/s21-more-image-2.png',
+      '/assets/images/s21-more-image-3.png',
+    ],
+    brand: 'Samsung',
+    sku: '210901842',
+    category: 'smartphone',
+    processor: 'Exynos 2100 / Snapdragon 888',
+    display: '6.2" Dynamic AMOLED 2X (2400 x 1080), 120Hz',
+    ram: '8GB LPDDR5',
+    storage: '128GB / 256GB / 512GB',
+    operatingSystem: 'Android 11',
+    battery: '4000mAh',
+    weight: '169g',
+  },
+  {
+    id: '3',
+    name: 'Smart TV LG OLED C1 Series',
+    image: '/assets/images/lg-oled-c1.png',
+    price: '35.990.000 đ',
+    discount: '-15%',
+    moreImages: [
+      '/assets/images/lg-oled-c1-more-image-1.png',
+      '/assets/images/lg-oled-c1-more-image-2.png',
+      '/assets/images/lg-oled-c1-more-image-3.png',
+      '/assets/images/lg-oled-c1-more-image-4.png',
+    ],
+    brand: 'LG',
+    sku: '210901843',
+    category: 'tv',
+    display: '55" / 65" / 77" OLED',
+    resolution: '4K Ultra HD (3840 x 2160)',
+    smartFeatures: ['AI ThinQ', 'WebOS', 'Google Assistant', 'Amazon Alexa'],
+    hdrSupport: 'Dolby Vision IQ / HDR10 / HLG',
+    connectivity: ['4 x HDMI', '3 x USB', 'Bluetooth 5.0', 'Wi-Fi'],
+    weight: '25.1kg (55") / 34.7kg (65") / 47.4kg (77")',
+  },
+  {
+    id: '4',
+    name: 'Headphones Sony WH-1000XM4',
+    image: '/assets/images/sony-wh-1000xm4.png',
+    price: '4.990.000 đ',
+    discount: '-20%',
+    moreImages: [
+      '/assets/images/sony-wh-1000xm4-more-image-1.png',
+      '/assets/images/sony-wh-1000xm4-more-image-2.png',
+      '/assets/images/sony-wh-1000xm4-more-image-3.png',
+    ],
+    brand: 'Sony',
+    sku: '210901844',
+    category: 'headphone',
+    type: 'Over-Ear',
+    wireless: true,
+    noiseCancellation: true,
+    battery: 'Up to 30 hours',
+  },
 ];
-
-export const processStatusMap = {
-    'SUCCESS': 'Thành công',
-    'ERROR': 'Thất bại'
-}
-
-export const verificationTypeMap = {
-    'CREDIT_SCORE': 'Credit score',
-    'FRAUD_SCORE': 'Fraud score'
-}

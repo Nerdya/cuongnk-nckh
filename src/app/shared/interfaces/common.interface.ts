@@ -1,18 +1,26 @@
-import {processStatusMap, verificationTypeMap} from "../constants/common.const";
-
-export interface BaseItem {
-    id: number;
-    code?: string;
-    name?: string;
-    status?: string;
-}
-
-export interface ProcessStatus {
-    id: number;
-    name: keyof typeof processStatusMap;
-}
-
-export interface VerificationType {
-    id: number;
-    name: keyof typeof verificationTypeMap;
+export interface Product {
+  id: string,
+  name: string,
+  image: string,
+  price: string,
+  discount: string,
+  moreImages: string[],
+  brand: string,
+  sku: string,
+  category: string,
+  processor?: string,
+  display?: string,
+  ram?: string,
+  graphics?: string,
+  storage?: string,
+  operatingSystem?: string,
+  battery?: string,
+  weight?: string,
+  resolution?: string,
+  smartFeatures?: string[],
+  hdrSupport?: string,
+  connectivity?: string[],
+  type?: string,
+  wireless?: boolean,
+  noiseCancellation?: boolean,
 }
