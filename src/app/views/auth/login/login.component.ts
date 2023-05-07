@@ -84,6 +84,7 @@ export class LoginComponent implements OnInit {
     let valid = users.some((user: any) => {
       if (user[AKeysEnum.USERNAME] === body[AKeysEnum.USERNAME]) {
         if (user[AKeysEnum.PASSWORD] === body[AKeysEnum.PASSWORD]) {
+          this.localStorageService.setItem('currentUser', user);
           return true;
         } else {
           this.loginForm.controls[AKeysEnum.PASSWORD].setErrors(null);

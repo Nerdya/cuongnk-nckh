@@ -13,12 +13,12 @@ const routes: Routes = [
     loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'user',
+    path: '',
     loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)
   },
   {
     path: '**',
-    redirectTo: 'user'
+    redirectTo: ''
   }
 ];
 
