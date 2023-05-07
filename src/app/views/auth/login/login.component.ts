@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
   ) {
   }
 
@@ -28,7 +26,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  submitForm(): void {
+  submit(): void {
     if (!this.validateForm.valid) {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
