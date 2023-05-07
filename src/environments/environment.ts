@@ -1,4 +1,4 @@
-import { appConfig } from './app-config';
+import {appConfig} from './app-config';
 
 export const environment = {
   production: false,
@@ -6,5 +6,4 @@ export const environment = {
   // authenticate
   LOGIN: '/authenticate/login',
   REGISTER: '/authenticate/register',
-  
 };

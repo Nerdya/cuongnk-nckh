@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../app/shared/shared.module';
-import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
-
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../shared/shared.module';
+import {AdminRoutingModule} from './admin-routing.module';
+import {AdminComponent} from './admin.component';
+import {LocationStrategy, PathLocationStrategy} from "@angular/common";
 
 
 @NgModule({
@@ -13,8 +13,12 @@ import { AdminComponent } from './admin.component';
   declarations: [
     AdminComponent,
   ],
-  exports: [
-    AdminComponent,
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: PathLocationStrategy,
+    }
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+}
