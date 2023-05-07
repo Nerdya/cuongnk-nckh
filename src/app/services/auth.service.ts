@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {APIHelperService} from './api-helper.service';
+import {LocalStorageService} from "./local-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +7,12 @@ import {APIHelperService} from './api-helper.service';
 export class AuthService {
 
   constructor(
-    private api: APIHelperService,
+    private localStorageService: LocalStorageService,
   ) {
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    return this.localStorageService.getItem('isLoggedIn') === true;
   }
 
-  login(username: string = "0395663678", password: string = "123456Aa") {
-    return this.api.post(environment.LOGIN, {username, password});
-  }
 }

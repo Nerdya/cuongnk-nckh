@@ -1,174 +1,182 @@
-<nz-layout class="app-layout">
-  <nz-header>
-    <div class="app-header">
-      <a class="logo" href="/">
-        <img src="../../../assets/images/logo.svg" alt="">
-      </a>
-      <div class="search-bar">
-        <input class="input-search" type="text" placeholder="Nhập mã hoặc tên sản phẩm..."/>
-        <button class="btn-search">
-          <span class="icon-search" nz-icon nzType="search" nzTheme="outline"></span>
-        </button>
+<div class="nckh-user">
+  <nz-layout class="app-layout">
+    <nz-header>
+      <div class="app-header">
+        <a class="logo" href="/">
+          <img src="../../../assets/images/logo.svg" alt="">
+        </a>
+        <div class="search-bar">
+          <input class="input-search" type="text" placeholder="Nhập mã hoặc tên sản phẩm..."/>
+          <button class="btn-search">
+            <span class="icon-search" nz-icon nzType="search" nzTheme="outline"></span>
+          </button>
+        </div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a class="nav-item-wrapper" href="/">
+              <span class="icon-nav-item" nz-icon nzType="file-text" nzTheme="fill"></span>
+              <span class="label-nav-item">Thông tin</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item-wrapper" href="/">
+              <span class="icon-nav-item" nz-icon nzType="file-text" nzTheme="fill"></span>
+              <span class="label-nav-item">Thông tin</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item-wrapper" href="/">
+              <span class="icon-nav-item" nz-icon nzType="file-text" nzTheme="fill"></span>
+              <span class="label-nav-item">Thông tin</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item-wrapper" (click)="login()">
+              <span class="icon-nav-item" nz-icon nzType="user" nzTheme="outline"></span>
+              <span class="label-nav-item">Đăng nhập</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item-wrapper" (click)="login()">
+              <span class="icon-nav-item" nz-icon nzType="user" nzTheme="outline"></span>
+              <span class="label-nav-item">Đăng nhập</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-item-wrapper" href="/">
-            <span class="icon-nav-item" nz-icon nzType="file-text" nzTheme="fill"></span>
-            <span class="label-nav-item">Thông tin</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item-wrapper" href="/">
-            <span class="icon-nav-item" nz-icon nzType="file-text" nzTheme="fill"></span>
-            <span class="label-nav-item">Thông tin</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item-wrapper" href="/">
-            <span class="icon-nav-item" nz-icon nzType="file-text" nzTheme="fill"></span>
-            <span class="label-nav-item">Thông tin</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item-wrapper" (click)="login()">
-            <span class="icon-nav-item" nz-icon nzType="user" nzTheme="outline"></span>
-            <span class="label-nav-item">Đăng nhập</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nz-header>
-  <nz-content>
-    <div class="inner-content">
-      <router-outlet></router-outlet>
-    </div>
-    <nz-footer>
-      <div class="app-footer">
-        <div class="row w-100">
-          <div class="col-2">
-            <div class="row">
-              <div class="col-12 fw-bold pt-2 pb-2">
-                Hỗ trợ khách hàng
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Thẻ ưu đãi
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Trung tâm bảo hành
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Thanh toán và giao hàng
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Dịch vụ sửa chữa và bảo trì
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Doanh nghiệp thân thiết
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+      <nz-footer>
+        <div class="app-footer">
+          <div class="row w-100">
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12 fw-bold pt-2 pb-2">
+                  Hỗ trợ khách hàng
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Thẻ ưu đãi
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Trung tâm bảo hành
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Thanh toán và giao hàng
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Dịch vụ sửa chữa và bảo trì
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Doanh nghiệp thân thiết
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="row">
-              <div class="col-12 fw-bold pt-2 pb-2">
-                Chính sách mua hàng và bảo hành
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Quy định chung
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Chính sách trả góp
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Chính sách bảo hành
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Chính sách bảo mật thông tin
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Chính sách đổi trả và hoàn tiền
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Chính sách vận chuyển và lắp đặt
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Quy định giá cả và hình thức thanh toán
-              </div>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="row">
-              <div class="col-12 fw-bold pt-2 pb-2">
-                Thông tin về chúng tôi
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Giới thiệu TTA
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Thông tin liên hệ
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Hệ thống chuỗi cửa hàng
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Hỏi đáp
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Tin công nghệ
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Tuyển dụng
+            <div class="col-3">
+              <div class="row">
+                <div class="col-12 fw-bold pt-2 pb-2">
+                  Chính sách mua hàng và bảo hành
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Quy định chung
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Chính sách trả góp
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Chính sách bảo hành
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Chính sách bảo mật thông tin
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Chính sách đổi trả và hoàn tiền
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Chính sách vận chuyển và lắp đặt
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Quy định giá cả và hình thức thanh toán
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="row">
-              <div class="col-12 fw-bold pt-2 pb-2">
-                Cộng đồng công nghệ TTA
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Gọi mua hàng: 0334350166
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Gọi chăm sóc: 0878506488
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                TTA Việt Nam
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                TTA Media
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                TTA Group
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12 fw-bold pt-2 pb-2">
+                  Thông tin về chúng tôi
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Giới thiệu TTA
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Thông tin liên hệ
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Hệ thống chuỗi cửa hàng
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Hỏi đáp
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Tin công nghệ
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Tuyển dụng
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-2">
-            <div class="row">
-              <div class="col-12 fw-bold pt-2 pb-2">
-                Email liên hệ
+            <div class="col-3">
+              <div class="row">
+                <div class="col-12 fw-bold pt-2 pb-2">
+                  Cộng đồng công nghệ TTA
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Gọi mua hàng: 0334350166
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Gọi chăm sóc: 0878506488
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  TTA Việt Nam
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  TTA Media
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  TTA Group
+                </div>
               </div>
-              <div class="col-12 pt-2 pb-2">
-                Hỗ trợ khách hàng
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                cskh@tta.vn
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Liên hệ báo giá
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                baogia@tta.vn
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                Hợp tác phát triển
-              </div>
-              <div class="col-12 pt-2 pb-2">
-                hoptac@tta.vn
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12 fw-bold pt-2 pb-2">
+                  Email liên hệ
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Hỗ trợ khách hàng
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  cskh@tta.vn
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Liên hệ báo giá
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  baogia@tta.vn
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  Hợp tác phát triển
+                </div>
+                <div class="col-12 pt-2 pb-2">
+                  hoptac@tta.vn
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </nz-footer>
-  </nz-content>
-</nz-layout>
+      </nz-footer>
+    </nz-content>
+  </nz-layout>
+</div>

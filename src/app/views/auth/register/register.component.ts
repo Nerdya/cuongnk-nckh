@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-
-import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
+import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
+import {AKeysEnum} from "../a-keys.enum";
+import {LocalStorageService} from "../../../services/local-storage.service";
+import {removeProperty} from "../../../shared/functions/common.function";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -9,57 +13,120 @@ import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  validateForm!: UntypedFormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
-
-  submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({onlySelf: true});
-        }
-      });
-    }
-  }
-
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls['checkPassword'].updateValueAndValidity());
-  }
-
-  confirmationValidator = (control: UntypedFormControl): { [s: string]: boolean } => {
+  registerForm!: FormGroup;
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return {required: true};
-    } else if (control.value !== this.validateForm.controls['password'].value) {
-      return {confirm: true, error: true};
+    } else if (control.value !== this.registerForm.controls[AKeysEnum.PASSWORD].value) {
+      return {confirm: true};
     }
     return {};
   };
-
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
+  multiDataControls: MultiDataControl[] = [
+    {
+      code: AKeysEnum.USERNAME,
+      value: null,
+      validators: [Validators.required, Validators.pattern(/^\w+$/), Validators.maxLength(255)],
+      options: {
+        name: 'Tên tài khoản',
+        control: new FormControl(),
+        dataType: DataTypeEnum.STRING,
+      },
+      state: {},
+    },
+    {
+      code: AKeysEnum.PASSWORD,
+      value: null,
+      validators: [Validators.required, Validators.pattern(/^\w+$/), Validators.maxLength(255)],
+      options: {
+        name: 'Mật khẩu',
+        control: new FormControl(),
+        dataType: DataTypeEnum.PASSWORD,
+      },
+      state: {},
+    },
+    {
+      code: AKeysEnum.CHECK_PASSWORD,
+      value: null,
+      validators: [Validators.required, this.confirmationValidator],
+      options: {
+        name: 'Mật khẩu xác thực',
+        control: new FormControl(),
+        dataType: DataTypeEnum.PASSWORD,
+      },
+      state: {},
+    },
+    {
+      code: AKeysEnum.FULL_NAME,
+      value: null,
+      validators: [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z]).+$/)],
+      options: {
+        name: 'Họ tên',
+        control: new FormControl(),
+        dataType: DataTypeEnum.STRING,
+      },
+      state: {},
+    },
+    {
+      code: AKeysEnum.EMAIL,
+      value: null,
+      validators: [Validators.required, Validators.email, Validators.maxLength(255)],
+      options: {
+        name: 'Email',
+        control: new FormControl(),
+        dataType: DataTypeEnum.STRING,
+      },
+      state: {},
+    },
+  ];
+  isRequired = (validators: ValidationErrors[]) => {
+    return validators.includes(Validators.required);
   }
+  agree = false;
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private localStorageService: LocalStorageService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      fullname: [null, [Validators.required]],
-      // phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      // website: [null, [Validators.required]],
-      // captcha: [null, [Validators.required]],
-      agree: [false]
+    this.initForm();
+  }
+
+  initForm(): void {
+    let formDataObj: any = {};
+    this.multiDataControls.forEach(element => {
+      element.options.control = this.fb.control(element.value, Validators.compose(element.validators));
+      formDataObj[element.code] = element.options.control;
     });
+    this.registerForm = this.fb.group(formDataObj);
+  }
+
+  submitForm(): void {
+    this.multiDataControls.forEach(element => {
+      if (this.registerForm.controls[element.code].errors && !element.state.touched) {
+        element.state = Object.assign({}, element.state, {touched: true});
+      }
+    });
+    if (!this.registerForm.valid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+    let users: any[] = this.localStorageService.getItem('users') ?? [];
+    let body = removeProperty(this.registerForm.value, AKeysEnum.CHECK_PASSWORD)
+    let valid = !users.some((user: any) => {
+      if (user[AKeysEnum.USERNAME] === body[AKeysEnum.USERNAME]) {
+        this.registerForm.controls[AKeysEnum.USERNAME].setErrors({duplicate: true});
+        return true;
+      }
+      return false;
+    });
+    if (valid) {
+      users.push(body);
+      this.localStorageService.setItem('users', users);
+      this.router.navigate(['/auth/login']);
+    }
   }
 }
