@@ -12,9 +12,12 @@ import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzCardModule} from 'ng-zorro-antd/card';
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 
 import {CategoryCardComponent} from '../components/category-card/category-card.component';
 import {MultiDataControlComponent} from "../components/multi-data-control/multi-data-control.component";
+
+import {CurrencyFormatPipe} from "./pipes/currency-format.pipe";
 
 
 @NgModule({
@@ -33,10 +36,13 @@ import {MultiDataControlComponent} from "../components/multi-data-control/multi-
     NzSelectModule,
     NzCardModule,
     NzDatePickerModule,
+    NzDropDownModule,
   ],
   declarations: [
     CategoryCardComponent,
     MultiDataControlComponent,
+
+    CurrencyFormatPipe,
   ],
   exports: [
     CommonModule,
@@ -53,9 +59,12 @@ import {MultiDataControlComponent} from "../components/multi-data-control/multi-
     NzSelectModule,
     NzCardModule,
     NzDatePickerModule,
+    NzDropDownModule,
 
     CategoryCardComponent,
     MultiDataControlComponent,
+
+    CurrencyFormatPipe,
   ]
 })
 export class SharedModule {

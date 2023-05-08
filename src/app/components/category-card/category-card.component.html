@@ -9,7 +9,7 @@
           {{item.name}}
         </div>
         <div class="col-12 mb-2">
-          {{item.price}}
+          {{item.price | currencyFormat}}
         </div>
         <div class="col-12 d-grid gap-2">
           <button type="button" class="btn btn-primary btn-sm" (click)="detail(item.id)">Xem chi tiết</button>

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     {
       code: AKeysEnum.USERNAME,
       value: null,
-      validators: [Validators.required, Validators.pattern(/^\w+$/), Validators.maxLength(255)],
+      validators: [Validators.required, Validators.maxLength(255)],
       options: {
         name: 'Tên tài khoản',
         placeholder: 'Tên tài khoản',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     {
       code: AKeysEnum.PASSWORD,
       value: null,
-      validators: [Validators.required, Validators.pattern(/^\w+$/), Validators.maxLength(255)],
+      validators: [Validators.required, Validators.maxLength(255)],
       options: {
         name: 'Mật khẩu',
         placeholder: 'Mật khẩu',
