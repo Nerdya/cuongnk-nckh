@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {LocalStorageService} from "../../../../services/local-storage.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -22,22 +24,16 @@ export class ProductDetailComponent {
     weight: '2.2kg',
     brand: 'ACER',
     sku: '210901841',
-    // "size": "23",
-    // "color": [
-    //     "vàng",
-    //     "đỏ"
-    // ],
-    // "sound": "ádasdasd",
-    // "memory": "adasdasd",
-    // "memoryStick": "dfadas",
-    // "camera": "ádasd",
-    // "insurance": "sdgsg",
-    // "connection": "rtewrwr",
-    // "category": null,
-    // "comments": [],
   }
 
-  constructor() {
+  constructor(
+    private route: ActivatedRoute,
+    private localStorageService: LocalStorageService,
+  ) {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      console.log('ID:', id);
+    });
   }
 
 

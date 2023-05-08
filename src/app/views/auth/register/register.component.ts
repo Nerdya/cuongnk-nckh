@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     {
       code: AKeysEnum.USERNAME,
       value: null,
-      validators: [Validators.required, Validators.pattern(/^\w+$/), Validators.maxLength(255)],
+      validators: [Validators.required, Validators.maxLength(255)],
       options: {
         name: 'Tên tài khoản',
         control: new FormControl(),
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
     {
       code: AKeysEnum.PASSWORD,
       value: null,
-      validators: [Validators.required, Validators.pattern(/^\w+$/), Validators.maxLength(255)],
+      validators: [Validators.required, Validators.maxLength(255)],
       options: {
         name: 'Mật khẩu',
         control: new FormControl(),

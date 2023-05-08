@@ -10,6 +10,21 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
+    path: 'category',
+    component: UserComponent,
+    loadChildren: () => import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
+    path: 'feedback',
+    component: UserComponent,
+    loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule)
+  },
+  {
+    path: 'cart',
+    component: UserComponent,
+    loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
+  },
+  {
     path: 'product',
     component: UserComponent,
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
@@ -18,29 +33,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: '../'
   }
-  // {
-  //   path: '../',
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: UserComponent,
-  //       loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-  //     },
-  //     {
-  //       path: 'product',
-  //       component: UserComponent,
-  //       loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
-  //     },
-  //     {
-  //       path: '**',
-  //       redirectTo: ''
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '**',
-  //   redirectTo: '../'
-  // }
 ];
 
 @NgModule({
