@@ -18,11 +18,11 @@ export class CategoryCardComponent {
   ) {
   }
 
-  detail(id: string) {
+  detail(id: number) {
     this.router.navigate(['/product/' + id]);
   }
 
-  addToCart(id: string) {
+  addToCart(id: number) {
     alert('addToCart ' + id);
   }
 }

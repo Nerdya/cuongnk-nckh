@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   products!: Product[];
   laptops: Product[] = [];
   smartphones: Product[] = [];
-  tvs: Product[] = [];
+  smartTVs: Product[] = [];
   headphones: Product[] = [];
   others: Product[] = [];
 
@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
         case 'smartphone':
           this.smartphones.push(product);
           break;
-        case 'tv':
-          this.tvs.push(product);
+        case 'smartTV':
+          this.smartTVs.push(product);
           break;
         case 'headphone':
           this.headphones.push(product);
