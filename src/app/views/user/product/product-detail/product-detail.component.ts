@@ -1,29 +1,22 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {LocalStorageService} from "../../../../services/local-storage.service";
+import {Product} from "../../../../shared/interfaces/common.interface";
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent {
-  product = {
-    id: '1',
-    name: 'Laptop ACER Aspire 7 A715-42G-R05G (Ryzen 5 5500U/RAM 8GB/512GB SSD/ Windows 11)',
-    image: '/assets/images/acer-aspire-7.webp',
-    price: '17.990.000 đ',
-    promotion: '-12.2%',
-    processor: 'Intel Core i5 - 11400H',
-    display: '15.6" IPS (1920 x 1080), 144Hz',
-    ram: '1 x 8GB DDR4 3200MHz',
-    graphics: 'RTX 3050 4GB GDDR6 / Intel UHD Graphics',
-    storage: '512GB SSD M.2 NVMe',
-    operatingSystem: 'Windows 11',
-    battery: '4 cell 57 Wh Pin liền',
-    weight: '2.2kg',
-    brand: 'ACER',
-    sku: '210901841',
+export class ProductDetailComponent implements OnInit {
+  id: number = 0;
+  product: Product = {
+    id: 0,
+    name: '',
+    image: '',
+    price: 0,
+    category: '',
+    description: ''
   }
 
   constructor(
@@ -31,10 +24,16 @@ export class ProductDetailComponent {
     private localStorageService: LocalStorageService,
   ) {
     this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      console.log('ID:', id);
+      this.id = Number(params.get('id'));
     });
   }
 
-
+  ngOnInit(): void {
+    const products = this.localStorageService.getItem('products') ?? [];
+    products.some((product: Product) => {
+      if (product.id === this.id) {
+        this.product = product;
+      }
+    })
+  }
 }
