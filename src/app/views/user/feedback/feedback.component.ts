@@ -1,4 +1,9 @@
 import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
+import {UKeysEnum} from "../u-keys.enum";
+import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
+import {LocalStorageService} from "../../../services/local-storage.service";
 
 @Component({
   selector: 'app-feedback',
@@ -6,5 +11,72 @@ import {Component} from '@angular/core';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent {
+  feedbackForm!: FormGroup;
+  multiDataControls: MultiDataControl[] = [
+    {
+      code: UKeysEnum.EMAIL,
+      value: null,
+      validators: [Validators.required, Validators.email, Validators.maxLength(255)],
+      options: {
+        name: 'Email',
+        control: new FormControl(),
+        dataType: DataTypeEnum.STRING,
+      },
+      state: {},
+    },
+    {
+      code: UKeysEnum.CONTENT,
+      value: null,
+      validators: [Validators.required],
+      options: {
+        name: 'Nội dung phản hồi',
+        control: new FormControl(),
+        dataType: DataTypeEnum.TEXTAREA,
+      },
+      state: {},
+    },
+  ];
+  isRequired = (validators: ValidationErrors[]) => {
+    return validators.includes(Validators.required);
+  }
+  remember = false;
 
+  constructor(
+    private fb: FormBuilder,
+    private localStorageService: LocalStorageService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    let formDataObj: any = {};
+    this.multiDataControls.forEach(element => {
+      element.options.control = this.fb.control(element.value, Validators.compose(element.validators));
+      formDataObj[element.code] = element.options.control;
+    });
+    this.feedbackForm = this.fb.group(formDataObj);
+  }
+
+  submit(): void {
+    this.multiDataControls.forEach(element => {
+      if (this.feedbackForm.controls[element.code].errors && !element.state.touched) {
+        element.state = Object.assign({}, element.state, {touched: true});
+      }
+    });
+    if (!this.feedbackForm.valid) {
+      return;
+    }
+    let body = this.feedbackForm.value;
+    let feedbacks: any[] = this.localStorageService.getItem('feedbacks') ?? [];
+    feedbacks.push(body);
+    this.localStorageService.setItem('feedbacks', feedbacks);
+    alert('Gửi phản hồi thành công!');
+    this.feedbackForm.controls[UKeysEnum.EMAIL].patchValue(null);
+    this.feedbackForm.controls[UKeysEnum.CONTENT].patchValue(null);
+    this.feedbackForm.controls[UKeysEnum.EMAIL].setErrors(null);
+    this.feedbackForm.controls[UKeysEnum.CONTENT].setErrors(null);
+  }
 }
