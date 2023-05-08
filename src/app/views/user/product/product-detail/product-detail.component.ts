@@ -9,17 +9,9 @@ export class ProductDetailComponent {
   product = {
     id: '1',
     name: 'Laptop ACER Aspire 7 A715-42G-R05G (Ryzen 5 5500U/RAM 8GB/512GB SSD/ Windows 11)',
-    image: '/assets/images/laptop-detail.png',
+    image: '/assets/images/acer-aspire-7.webp',
     price: '17.990.000 đ',
     promotion: '-12.2%',
-    moreImages: [
-      '/assets/images/laptop-detail-more-image-1.png',
-      '/assets/images/laptop-detail-more-image-2.png',
-      '/assets/images/laptop-detail-more-image-3.png',
-      '/assets/images/laptop-detail-more-image-4.png',
-      '/assets/images/laptop-detail-more-image-5.png',
-      '/assets/images/laptop-detail-more-image-6.png',
-    ],
     processor: 'Intel Core i5 - 11400H',
     display: '15.6" IPS (1920 x 1080), 144Hz',
     ram: '1 x 8GB DDR4 3200MHz',
@@ -44,4 +36,9 @@ export class ProductDetailComponent {
     // "category": null,
     // "comments": [],
   }
+
+  constructor() {
+  }
+
+
 }
