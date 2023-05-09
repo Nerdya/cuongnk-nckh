@@ -4,5 +4,4 @@ export enum AuKeysEnum {
   CHECK_PASSWORD = 'checkPassword',
   FULL_NAME = 'fullName',
   EMAIL = 'email',
-  AGREE = 'agree',
 }

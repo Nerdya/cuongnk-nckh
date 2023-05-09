@@ -4,8 +4,8 @@ import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
 import {AuKeysEnum} from "../au-keys.enum";
 import {LocalStorageService} from "../../../services/local-storage.service";
-import {removeProperty} from "../../../shared/functions/common.function";
 import {Router} from "@angular/router";
+import {User} from "../../../shared/interfaces/common.interface";
 
 @Component({
   selector: 'app-register',
@@ -114,8 +114,15 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     }
-    let users: any[] = this.localStorageService.getItem('user') ?? [];
-    let body = removeProperty(this.registerForm.value, AuKeysEnum.CHECK_PASSWORD)
+    let users: User[] = this.localStorageService.getItem('user') ?? [];
+    const formValue = this.registerForm.value;
+    let body = {
+      user_id: users.length + 1,
+      [AuKeysEnum.USERNAME]: formValue[AuKeysEnum.USERNAME],
+      [AuKeysEnum.PASSWORD]: formValue[AuKeysEnum.PASSWORD],
+      [AuKeysEnum.FULL_NAME]: formValue[AuKeysEnum.FULL_NAME],
+      [AuKeysEnum.EMAIL]: formValue[AuKeysEnum.EMAIL],
+    }
     let valid = !users.some((user: any) => {
       if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
         this.registerForm.controls[AuKeysEnum.USERNAME].setErrors({duplicate: true});

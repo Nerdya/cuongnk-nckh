@@ -1,5 +1,13 @@
+export interface User {
+  user_id: number,
+  username: string,
+  password: string,
+  fullName: string,
+  email: string,
+}
+
 export interface Product {
-  id: number,
+  product_id: number,
   name: string,
   image: string,
   price: number,

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {AuKeysEnum} from "../au-keys.enum";
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
 import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
+import {User} from "../../../shared/interfaces/common.interface";
 
 @Component({
   selector: 'app-login',
@@ -75,13 +76,13 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    let users: any[] = this.localStorageService.getItem('user') ?? [];
+    let users: User[] = this.localStorageService.getItem('user') ?? [];
     if (!users.length) {
       alert('Không có người dùng trong hệ thống!');
       return;
     }
     let body = this.loginForm.value;
-    let valid = users.some((user: any) => {
+    let valid = users.some((user: User) => {
       if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
         if (user[AuKeysEnum.PASSWORD] === body[AuKeysEnum.PASSWORD]) {
           this.localStorageService.setItem('currentUser', user);
