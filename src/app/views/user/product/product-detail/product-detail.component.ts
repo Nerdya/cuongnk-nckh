@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {LocalStorageService} from "../../../../services/local-storage.service";
-import {Product} from "../../../../shared/interfaces/common.interface";
+import {CartItem, Product} from "../../../../shared/interfaces/common.interface";
 
 @Component({
   selector: 'app-product-detail',
@@ -34,6 +34,28 @@ export class ProductDetailComponent implements OnInit {
       if (product.id === this.id) {
         this.product = product;
       }
-    })
+    });
+  }
+
+  addToCart(id: number) {
+    let cartItems = this.localStorageService.getItem('cartItems') ?? [];
+    const exist = cartItems.some((cartItem: CartItem) => {
+      if (cartItem.id === id) {
+        cartItem.amount++;
+        return true;
+      }
+      return false;
+    });
+    if (!exist) {
+      const cartItem: CartItem = {
+        id: this.product.id,
+        name: this.product.name,
+        image: this.product.image,
+        price: this.product.price,
+        amount: 1,
+      };
+      cartItems.push(cartItem);
+    }
+    this.localStorageService.setItem('cartItems', cartItems);
   }
 }

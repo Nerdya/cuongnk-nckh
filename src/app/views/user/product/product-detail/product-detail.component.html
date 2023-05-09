@@ -29,8 +29,11 @@
             <hr class="horizontal-spacer mt-4 mb-4">
           </div>
           <div class="col-12 d-flex gap-4">
-            <button type="button" class="btn btn-primary w-50 fw-bold">Mua ngay</button>
-            <button type="button" class="btn btn-outline-secondary w-50 fw-bold">Thêm vào giỏ hàng</button>
+<!--            <button type="button" class="btn btn-primary w-50 fw-bold">Mua ngay</button>-->
+            <button type="button"
+                    class="btn btn-outline-secondary w-50 fw-bold"
+                    (click)="addToCart(product.id)"
+            >Thêm vào giỏ hàng</button>
           </div>
         </div>
       </div>

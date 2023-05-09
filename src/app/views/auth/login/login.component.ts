@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {LocalStorageService} from "../../../services/local-storage.service";
 import {Router} from "@angular/router";
-import {AKeysEnum} from "../a-keys.enum";
+import {AuKeysEnum} from "../au-keys.enum";
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
 import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   multiDataControls: MultiDataControl[] = [
     {
-      code: AKeysEnum.USERNAME,
+      code: AuKeysEnum.USERNAME,
       value: null,
       validators: [Validators.required, Validators.maxLength(255)],
       options: {
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       state: {},
     },
     {
-      code: AKeysEnum.PASSWORD,
+      code: AuKeysEnum.PASSWORD,
       value: null,
       validators: [Validators.required, Validators.maxLength(255)],
       options: {
@@ -75,20 +75,20 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    let users: any[] = this.localStorageService.getItem('users') ?? [];
+    let users: any[] = this.localStorageService.getItem('user') ?? [];
     if (!users.length) {
       alert('Không có người dùng trong hệ thống!');
       return;
     }
     let body = this.loginForm.value;
     let valid = users.some((user: any) => {
-      if (user[AKeysEnum.USERNAME] === body[AKeysEnum.USERNAME]) {
-        if (user[AKeysEnum.PASSWORD] === body[AKeysEnum.PASSWORD]) {
+      if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
+        if (user[AuKeysEnum.PASSWORD] === body[AuKeysEnum.PASSWORD]) {
           this.localStorageService.setItem('currentUser', user);
           return true;
         } else {
-          this.loginForm.controls[AKeysEnum.PASSWORD].setErrors(null);
-          this.loginForm.controls[AKeysEnum.PASSWORD].setErrors({wrongPassword: true});
+          this.loginForm.controls[AuKeysEnum.PASSWORD].setErrors(null);
+          this.loginForm.controls[AuKeysEnum.PASSWORD].setErrors({wrongPassword: true});
         }
       }
       return false;
@@ -103,8 +103,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
       }
     } else {
-      this.loginForm.controls[AKeysEnum.USERNAME].setErrors(null);
-      this.loginForm.controls[AKeysEnum.USERNAME].setErrors({notFound: true});
+      this.loginForm.controls[AuKeysEnum.USERNAME].setErrors(null);
+      this.loginForm.controls[AuKeysEnum.USERNAME].setErrors({notFound: true});
     }
   }
 }
