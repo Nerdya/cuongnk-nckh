@@ -15,7 +15,11 @@ export class UserComponent {
   ) {
   }
 
-  get isUserLoggedIn() {
+  get currentYear() {
+    return new Date().getFullYear();
+  }
+
+  get getCurrentUser() {
     return this.localStorageService.getItem('currentUser');
   }
 

@@ -9,7 +9,7 @@ import {Product} from "../../shared/interfaces/common.interface";
 })
 export class CategoryCardComponent {
   @Input() cardTitle = 'Card title';
-  @Input() extra = 'More';
+  @Input() extra = '';
   @Input() extraLink = '/';
   @Input() list!: Product[];
 
