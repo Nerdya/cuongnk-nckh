@@ -13,17 +13,17 @@
         </div>
         <ul class="nav-list">
           <li class="nav-item">
-            <a class="nav-item-wrapper" routerLink="/" nz-dropdown [nzDropdownMenu]="menu">
+            <a class="nav-item-wrapper" routerLink="/" nz-dropdown [nzDropdownMenu]="categoryMenu">
               <span class="icon-nav-item" nz-icon nzType="appstore" nzTheme="outline"></span>
               <span class="label-nav-item">Danh mục</span>
             </a>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
+            <nz-dropdown-menu #categoryMenu="nzDropdownMenu">
               <ul nz-menu>
-                <li nz-menu-item>Laptop</li>
-                <li nz-menu-item>Điện thoại</li>
-                <li nz-menu-item>TV</li>
-                <li nz-menu-item>Tai nghe</li>
-                <li nz-menu-item>Sản phẩm khác</li>
+                <li nz-menu-item routerLink="/category/laptop">Laptop</li>
+                <li nz-menu-item routerLink="/category/smartphone">Điện thoại</li>
+                <li nz-menu-item routerLink="/category/smart-tv">Smart TV</li>
+                <li nz-menu-item routerLink="/category/headphone">Tai nghe</li>
+                <li nz-menu-item routerLink="/category/other">Sản phẩm khác</li>
               </ul>
             </nz-dropdown-menu>
           </li>
@@ -40,12 +40,22 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-item-wrapper" (click)="isUserLoggedIn ? logout() : login()">
+            <a class="nav-item-wrapper" nz-dropdown [nzDropdownMenu]="accountMenu">
               <span class="icon-nav-item" nz-icon nzType="user" nzTheme="outline"></span>
-              <span class="label-nav-item">
-                {{isUserLoggedIn ? "Đăng xuất" : "Đăng nhập"}}
-              </span>
+              <span class="label-nav-item">Tài khoản</span>
             </a>
+            <nz-dropdown-menu #accountMenu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item *ngIf="getCurrentUser">
+                  Hi, {{getCurrentUser.fullName}}
+                </li>
+                <li nz-menu-divider *ngIf="getCurrentUser"></li>
+                <li nz-menu-item>Tài khoản của tôi</li>
+                <li nz-menu-item (click)="getCurrentUser ? logout() : login()">
+                  {{getCurrentUser ? "Đăng xuất" : "Đăng nhập"}}
+                </li>
+              </ul>
+            </nz-dropdown-menu>
           </li>
         </ul>
       </div>
@@ -59,7 +69,7 @@
       <div class="app-footer">
         <div class="row w-100">
           <div class="col-12 mt-1 mb-1 text-center">
-            Nguyễn Kim Cương
+            {{currentYear}}&copy;Nguyễn Kim Cương - DHTI14A1CL - 18/02/2002
           </div>
         </div>
       </div>
