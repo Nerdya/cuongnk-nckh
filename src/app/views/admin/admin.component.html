@@ -7,32 +7,29 @@
               [(nzCollapsed)]="isCollapsed"
               [nzTrigger]="null">
       <div class="sidebar-logo">
-        <a routerLink="/">
+        <a routerLink="/admin">
           <img src="../../../assets/images/logo.svg" alt="logo">
           <h1>CuongNK</h1>
         </a>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+        <li nz-submenu nzOpen nzTitle="Quản lý" nzIcon="setting">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/admin/users">Users</a>
+              <a routerLink="/admin/users">Quản lý người dùng</a>
             </li>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/admin/categories">Categories</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Workplace</a>
+              <a routerLink="/admin/products">Quản lý sản phẩm</a>
             </li>
           </ul>
         </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
-            </li>
-          </ul>
-        </li>
+<!--        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">-->
+<!--          <ul>-->
+<!--            <li nz-menu-item nzMatchRouter>-->
+<!--              <a>Basic Form</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </li>-->
       </ul>
     </nz-sider>
     <nz-layout>
