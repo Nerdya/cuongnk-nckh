@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
-import {AKeysEnum} from "../a-keys.enum";
+import {AuKeysEnum} from "../au-keys.enum";
 import {LocalStorageService} from "../../../services/local-storage.service";
-import {removeProperty} from "../../../shared/functions/common.function";
 import {Router} from "@angular/router";
+import {User} from "../../../shared/interfaces/common.interface";
 
 @Component({
   selector: 'app-register',
@@ -17,14 +17,14 @@ export class RegisterComponent implements OnInit {
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return {required: true};
-    } else if (control.value !== this.registerForm.controls[AKeysEnum.PASSWORD].value) {
+    } else if (control.value !== this.registerForm.controls[AuKeysEnum.PASSWORD].value) {
       return {confirm: true};
     }
     return {};
   };
   multiDataControls: MultiDataControl[] = [
     {
-      code: AKeysEnum.USERNAME,
+      code: AuKeysEnum.USERNAME,
       value: null,
       validators: [Validators.required, Validators.maxLength(255)],
       options: {
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
       state: {},
     },
     {
-      code: AKeysEnum.PASSWORD,
+      code: AuKeysEnum.PASSWORD,
       value: null,
       validators: [Validators.required, Validators.maxLength(255)],
       options: {
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       state: {},
     },
     {
-      code: AKeysEnum.CHECK_PASSWORD,
+      code: AuKeysEnum.CHECK_PASSWORD,
       value: null,
       validators: [Validators.required, this.confirmationValidator],
       options: {
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
       state: {},
     },
     {
-      code: AKeysEnum.FULL_NAME,
+      code: AuKeysEnum.FULL_NAME,
       value: null,
       validators: [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z]).+$/)],
       options: {
@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
       state: {},
     },
     {
-      code: AKeysEnum.EMAIL,
+      code: AuKeysEnum.EMAIL,
       value: null,
       validators: [Validators.required, Validators.email, Validators.maxLength(255)],
       options: {
@@ -114,18 +114,25 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     }
-    let users: any[] = this.localStorageService.getItem('users') ?? [];
-    let body = removeProperty(this.registerForm.value, AKeysEnum.CHECK_PASSWORD)
+    let users: User[] = this.localStorageService.getItem('user') ?? [];
+    const formValue = this.registerForm.value;
+    let body = {
+      user_id: users.length + 1,
+      [AuKeysEnum.USERNAME]: formValue[AuKeysEnum.USERNAME],
+      [AuKeysEnum.PASSWORD]: formValue[AuKeysEnum.PASSWORD],
+      [AuKeysEnum.FULL_NAME]: formValue[AuKeysEnum.FULL_NAME],
+      [AuKeysEnum.EMAIL]: formValue[AuKeysEnum.EMAIL],
+    }
     let valid = !users.some((user: any) => {
-      if (user[AKeysEnum.USERNAME] === body[AKeysEnum.USERNAME]) {
-        this.registerForm.controls[AKeysEnum.USERNAME].setErrors({duplicate: true});
+      if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
+        this.registerForm.controls[AuKeysEnum.USERNAME].setErrors({duplicate: true});
         return true;
       }
       return false;
     });
     if (valid) {
       users.push(body);
-      this.localStorageService.setItem('users', users);
+      this.localStorageService.setItem('user', users);
       this.router.navigate(['/auth/login']);
     }
   }

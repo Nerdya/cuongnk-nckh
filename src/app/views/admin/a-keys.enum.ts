@@ -1,0 +1,20 @@
+export enum AKeysEnum {
+  CODE = 'code',
+  NAME = 'name',
+  PARTNER_ID = 'partnerId',
+  PARTNER_CODE = 'partnerCode',
+  PRODUCTS = 'products',
+  PRODUCT_FILTER_DTOS = 'productFilterDtos',
+  PRODUCT_ID = 'productId',
+  PRODUCT_CODE = 'productCode',
+  SMS_PLANS = 'smsPlans',
+  SMS_PLAN_FILTER_DTOS = 'smsPlanFilterDtos',
+  SMS_PLAN_ID = 'smsPlanId',
+  SMS_PLAN_CODE = 'smsPlanCode',
+  CREATOR_NAME = 'creatorName',
+  CREATED_TIME = 'createdTime',
+  STATUS = 'status',
+  // Filter
+  DATE_FROM = 'dateFrom',
+  DATE_TO = 'dateTo',
+}

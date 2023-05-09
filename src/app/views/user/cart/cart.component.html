@@ -1,1 +1,28 @@
-<p>cart works!</p>
+<div class="nckh-cart">
+  <nz-card nzTitle="Giỏ hàng">
+    <div class="row">
+      <div class="col-lg-8 col-12">
+        <nz-card>
+          <form nz-form [formGroup]="cartForm" class="auth-form" (ngSubmit)="submit()">
+            <div class="control-wrapper" *ngFor="let control of multiDataControls">
+              <p class="control-label">
+                {{ control.options.name }}<span class="required-sign" *ngIf="isRequired(control.validators)">*</span>
+              </p>
+              <app-multi-data-control class="control-input"
+                                      [formControlName]="control.code"
+                                      [options]="control.options"
+                                      [state]="control.state"
+              ></app-multi-data-control>
+            </div>
+            <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Gửi phản hồi</button>
+          </form>
+        </nz-card>
+      </div>
+      <div class="col-lg-4 col-12">
+        <nz-card>
+          <h2>Thanh toán</h2>
+        </nz-card>
+      </div>
+    </div>
+  </nz-card>
+</div>

@@ -10,14 +10,14 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
-    path: 'users',
+    path: 'user',
     component: AdminComponent,
-    loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule)
   },
   {
-    path: 'products',
+    path: 'product',
     component: AdminComponent,
-    loadChildren: () => import('./products/products.module').then((m) => m.ProductsModule)
+    loadChildren: () => import('./product/product.module').then((m) => m.ProductModule)
   },
   {
     path: '**',
