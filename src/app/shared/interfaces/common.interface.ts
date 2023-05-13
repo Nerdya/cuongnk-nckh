@@ -1,9 +1,18 @@
+export interface Table {
+  id: string,
+  schemaId: string,
+  tableName: string,
+  rows: User[],
+}
+
 export interface User {
-  user_id: number,
+  id?: string,
   username: string,
   password: string,
   fullName: string,
   email: string,
+  phoneNumber: string,
+  role?: string,
 }
 
 export interface Product {

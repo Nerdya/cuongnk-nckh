@@ -5,7 +5,8 @@ import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.in
 import {AuKeysEnum} from "../au-keys.enum";
 import {LocalStorageService} from "../../../services/local-storage.service";
 import {Router} from "@angular/router";
-import {User} from "../../../shared/interfaces/common.interface";
+import {Table, User} from "../../../shared/interfaces/common.interface";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -83,9 +84,11 @@ export class RegisterComponent implements OnInit {
     return validators.includes(Validators.required);
   }
   agree = false;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
     private localStorageService: LocalStorageService,
     private router: Router,
   ) {
@@ -100,40 +103,71 @@ export class RegisterComponent implements OnInit {
     this.multiDataControls.forEach(element => {
       element.options.control = this.fb.control(element.value, Validators.compose(element.validators));
       formDataObj[element.code] = element.options.control;
+
+      element.state = {
+        disabled: false,
+        touched: false,
+      }
     });
     this.registerForm = this.fb.group(formDataObj);
   }
 
   submitForm(): void {
+    this.loading = true;
     this.multiDataControls.forEach(element => {
       if (this.registerForm.controls[element.code].errors && !element.state.touched) {
         element.state = Object.assign({}, element.state, {touched: true});
       }
     });
     if (!this.registerForm.valid) {
-      this.registerForm.markAllAsTouched();
+      this.loading = false;
       return;
     }
-    let users: User[] = this.localStorageService.getItem('user') ?? [];
     const formValue = this.registerForm.value;
-    let body = {
-      user_id: users.length + 1,
+    let body: User = {
       [AuKeysEnum.USERNAME]: formValue[AuKeysEnum.USERNAME],
       [AuKeysEnum.PASSWORD]: formValue[AuKeysEnum.PASSWORD],
       [AuKeysEnum.FULL_NAME]: formValue[AuKeysEnum.FULL_NAME],
       [AuKeysEnum.EMAIL]: formValue[AuKeysEnum.EMAIL],
+      [AuKeysEnum.PHONE_NUMBER]: '',
     }
-    let valid = !users.some((user: any) => {
-      if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
-        this.registerForm.controls[AuKeysEnum.USERNAME].setErrors({duplicate: true});
-        return true;
+    // get users table
+    let usersTable: Table;
+    this.authService.getUsersTable().subscribe({
+      next: (res: Table) => {
+        if (res) {
+          usersTable = res;
+        }
+      },
+      error: (e) => {
+        console.error(e);
+        this.loading = false;
+      },
+      complete: () => {
+        let users: User[] = usersTable.rows;
+        // check body valid
+        let invalid = users.some((user: any) => {
+          return user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME];
+        });
+        if (invalid) {
+          if (!this.multiDataControls[0].state.touched) {
+            this.multiDataControls[0].state.touched = true;
+          }
+          this.registerForm.controls[AuKeysEnum.USERNAME].setErrors({duplicate: true});
+          this.loading = false;
+        } else {
+          body[AuKeysEnum.ID] = (users.length + 1).toString();
+          // update users table
+          usersTable.rows.push(body);
+          this.authService.updateUsersTable(usersTable).subscribe({
+            next: () => {
+              this.loading = false;
+              this.router.navigate(['/auth/login']);
+            }
+          });
+        }
       }
-      return false;
     });
-    if (valid) {
-      users.push(body);
-      this.localStorageService.setItem('user', users);
-      this.router.navigate(['/auth/login']);
-    }
+
   }
 }
