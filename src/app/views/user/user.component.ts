@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {LocalStorageService} from "../../services/local-storage.service";
+import {SessionStorageService} from "../../services/session-storage.service";
 
 @Component({
   selector: 'app-user',
@@ -10,7 +10,7 @@ import {LocalStorageService} from "../../services/local-storage.service";
 export class UserComponent {
 
   constructor(
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private router: Router,
   ) {
   }
@@ -20,7 +20,7 @@ export class UserComponent {
   }
 
   get getCurrentUser() {
-    return this.localStorageService.getItem('currentUser');
+    return this.sessionStorageService.getItem('currentUser');
   }
 
   login() {
@@ -28,7 +28,11 @@ export class UserComponent {
   }
 
   logout() {
-    this.localStorageService.removeItem('currentUser');
+    this.sessionStorageService.removeItem('currentUser');
     this.router.navigate(['/auth/login']);
+  }
+
+  register() {
+    this.router.navigate(['/auth/register']);
   }
 }

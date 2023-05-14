@@ -46,14 +46,15 @@
             </a>
             <nz-dropdown-menu #accountMenu="nzDropdownMenu">
               <ul nz-menu>
-                <li nz-menu-item *ngIf="getCurrentUser">
-                  Hi, {{getCurrentUser.fullName}}
+                <li nz-menu-item>
+                  Hi, {{getCurrentUser ? getCurrentUser.fullName : 'Guest'}}
                 </li>
-                <li nz-menu-divider *ngIf="getCurrentUser"></li>
-                <li nz-menu-item>Tài khoản của tôi</li>
+                <li nz-menu-divider></li>
+                <li nz-menu-item *ngIf="getCurrentUser">Tài khoản của tôi</li>
                 <li nz-menu-item (click)="getCurrentUser ? logout() : login()">
                   {{getCurrentUser ? "Đăng xuất" : "Đăng nhập"}}
                 </li>
+                <li nz-menu-item (click)="register()">Đăng ký</li>
               </ul>
             </nz-dropdown-menu>
           </li>
