@@ -1,6 +1,6 @@
 <div class="nckh-feedback">
   <nz-card nzTitle="Phản hồi">
-    <form nz-form [formGroup]="feedbackForm" class="auth-form" (ngSubmit)="submit()">
+    <form nz-form [formGroup]="feedbackForm" class="cuongnk-form" (ngSubmit)="submit()">
       <div class="control-wrapper" *ngFor="let control of multiDataControls">
         <p class="control-label">
           {{ control.options.name }}<span class="required-sign" *ngIf="isRequired(control.validators)">*</span>
@@ -11,7 +11,7 @@
                                 [state]="control.state"
         ></app-multi-data-control>
       </div>
-      <button nz-button class="login-form-button form-submit-button" [nzType]="'primary'">Gửi phản hồi</button>
+      <button nz-button class="form-submit-button" nzType="primary" [nzLoading]="loading">Gửi phản hồi</button>
     </form>
   </nz-card>
 </div>
