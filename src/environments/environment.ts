@@ -5,4 +5,5 @@ export const environment = {
   API_URL: appConfig.API_URL,
   USERS_TABLE: '/1',
   PRODUCTS_TABLE: '/2',
+  FEEDBACKS_TABLE: '/3',
 };

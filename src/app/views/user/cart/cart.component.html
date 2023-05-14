@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-8 col-12">
         <nz-card>
-          <form nz-form [formGroup]="cartForm" class="auth-form" (ngSubmit)="submit()">
+          <form nz-form [formGroup]="cartForm" class="cuongnk-form" (ngSubmit)="submit()">
             <div class="control-wrapper" *ngFor="let control of multiDataControls">
               <p class="control-label">
                 {{ control.options.name }}<span class="required-sign" *ngIf="isRequired(control.validators)">*</span>

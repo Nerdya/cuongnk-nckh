@@ -3,7 +3,10 @@ import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from 
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
 import {UKeysEnum} from "../u-keys.enum";
 import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
-import {LocalStorageService} from "../../../services/local-storage.service";
+import {SessionStorageService} from "../../../services/session-storage.service";
+import {Feedback, Table} from "../../../shared/interfaces/common.interface";
+import {UserService} from "../../../services/user.service";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-feedback',
@@ -39,11 +42,13 @@ export class FeedbackComponent {
   isRequired = (validators: ValidationErrors[]) => {
     return validators.includes(Validators.required);
   }
-  remember = false;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
-    private localStorageService: LocalStorageService,
+    private userService: UserService,
+    private sessionStorageService: SessionStorageService,
+    private notifyService: NotifyService,
   ) {
   }
 
@@ -61,6 +66,7 @@ export class FeedbackComponent {
   }
 
   submit(): void {
+    this.loading = true;
     this.multiDataControls.forEach(element => {
       if (this.feedbackForm.controls[element.code].errors && !element.state.touched) {
         element.state = Object.assign({}, element.state, {touched: true});
@@ -70,13 +76,35 @@ export class FeedbackComponent {
       return;
     }
     let body = this.feedbackForm.value;
-    let feedbacks: any[] = this.localStorageService.getItem('feedbacks') ?? [];
-    feedbacks.push(body);
-    this.localStorageService.setItem('feedbacks', feedbacks);
-    alert('Gửi phản hồi thành công!');
-    this.feedbackForm.controls[UKeysEnum.EMAIL].patchValue(null);
-    this.feedbackForm.controls[UKeysEnum.CONTENT].patchValue(null);
-    this.feedbackForm.controls[UKeysEnum.EMAIL].setErrors(null);
-    this.feedbackForm.controls[UKeysEnum.CONTENT].setErrors(null);
+
+    // get feedbacks table
+    let feedbacksTable: Table;
+    this.userService.getFeedbacksTable().subscribe({
+      next: (res: Table) => {
+        if (res) {
+          feedbacksTable = res;
+        }
+      },
+      error: (e) => {
+        console.error(e);
+        this.loading = false;
+      },
+      complete: () => {
+        let feedbacks: Feedback[] = feedbacksTable.rows;
+        body[UKeysEnum.ID] = (feedbacks.length + 1).toString();
+        // update feedbacks table
+        feedbacksTable.rows.push(body);
+        this.userService.updateFeedbacksTable(feedbacksTable).subscribe({
+          next: () => {
+            this.notifyService.success('Gửi phản hồi thành công!');
+            this.feedbackForm.controls[UKeysEnum.EMAIL].patchValue(null);
+            this.feedbackForm.controls[UKeysEnum.CONTENT].patchValue(null);
+            this.feedbackForm.controls[UKeysEnum.EMAIL].setErrors(null);
+            this.feedbackForm.controls[UKeysEnum.CONTENT].setErrors(null);
+            this.loading = false;
+          }
+        });
+      }
+    });
   }
 }

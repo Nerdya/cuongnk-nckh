@@ -2,7 +2,7 @@ export interface Table {
   id: string,
   schemaId: string,
   tableName: string,
-  rows: User[],
+  rows: any[],
 }
 
 export interface User {
@@ -22,6 +22,12 @@ export interface Product {
   price: number,
   category: string,
   description: string,
+}
+
+export interface Feedback {
+  id?: string,
+  email: string,
+  content: string,
 }
 
 export interface CartItem {
