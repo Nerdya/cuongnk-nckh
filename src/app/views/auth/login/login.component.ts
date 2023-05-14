@@ -118,6 +118,7 @@ export class LoginComponent implements OnInit {
               this.sessionStorageService.setItem('currentUser', user);
               invalid = false;
             } else {
+              this.notifyService.error('Mật khẩu không đúng!');
               this.loginForm.controls[AuKeysEnum.PASSWORD].setErrors({wrongPassword: true});
             }
             return true;
@@ -125,6 +126,7 @@ export class LoginComponent implements OnInit {
           return false;
         });
         if (!usernameFound) {
+          this.notifyService.error('Tên tài khoản không tồn tại!');
           this.loginForm.controls[AuKeysEnum.USERNAME].setErrors({notFound: true});
         }
         if (invalid) {

@@ -156,6 +156,7 @@ export class RegisterComponent implements OnInit {
           return user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME];
         });
         if (invalid) {
+          this.notifyService.error('Tên tài khoản đã tồn tại!');
           this.registerForm.controls[AuKeysEnum.USERNAME].setErrors({duplicate: true});
           this.loading = false;
         } else {
