@@ -13,15 +13,15 @@
     </div>
     <div class="row">
       <div class="col-12 mb-2">
-        <label nz-checkbox [(ngModel)]="remember" [ngModelOptions]="{standalone: true}">
-          Nhớ đăng nhập
+        <label nz-checkbox (nzCheckedChange)="togglePasswordVisibility()">
+          Hiện mật khẩu
         </label>
       </div>
     </div>
 <!--      <div nz-col [nzSpan]="12">-->
 <!--        <a class="login-form-forgot" routerLink="/auth/forgot-password">Quên mật khẩu?</a>-->
 <!--      </div>-->
-    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Đăng nhập</button>
+    <button nz-button class="form-submit-button" nzType="primary" [nzLoading]="loading">Đăng nhập</button>
     Hoặc
     <a routerLink="/auth/register">đăng ký ngay!</a>
   </form>
