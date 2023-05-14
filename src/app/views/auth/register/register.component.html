@@ -24,10 +24,8 @@
         </label>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 text-center">
-        <button nz-button nzType="primary" [disabled]="!agree" [nzLoading]="loading">Đăng ký</button>
-      </div>
-    </div>
+    <button nz-button class="form-submit-button" nzType="primary" [disabled]="!agree" [nzLoading]="loading">Đăng ký</button>
+    Đã có tài khoản?
+    <a routerLink="/auth/login">Đăng nhập</a>
   </form>
 </div>

@@ -34,7 +34,7 @@
           <nz-input-group [nzPrefix]="options.prefixIcon ? prefixIcon : ''"
                           [nzSuffix]="options.suffixIcon ? suffixIcon : ''">
             <input nz-input
-                   type="password"
+                   [type]="options.showPassword ? 'text': 'password'"
                    [placeholder]="options.placeholder"
                    [formControl]="options.control"
             />

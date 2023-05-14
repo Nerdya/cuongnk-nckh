@@ -3,10 +3,11 @@ import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from 
 import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
 import {AuKeysEnum} from "../au-keys.enum";
-import {LocalStorageService} from "../../../services/local-storage.service";
+import {SessionStorageService} from "../../../services/session-storage.service";
 import {Router} from "@angular/router";
 import {Table, User} from "../../../shared/interfaces/common.interface";
 import {AuthService} from "../../../services/auth.service";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-register',
@@ -89,8 +90,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private router: Router,
+    private notifyService: NotifyService,
   ) {
   }
 
@@ -118,6 +120,9 @@ export class RegisterComponent implements OnInit {
       if (this.registerForm.controls[element.code].errors && !element.state.touched) {
         element.state = Object.assign({}, element.state, {touched: true});
       }
+      if (!element.state.touched) {
+        element.state.touched = true;
+      }
     });
     if (!this.registerForm.valid) {
       this.loading = false;
@@ -131,6 +136,7 @@ export class RegisterComponent implements OnInit {
       [AuKeysEnum.EMAIL]: formValue[AuKeysEnum.EMAIL],
       [AuKeysEnum.PHONE_NUMBER]: '',
     }
+
     // get users table
     let usersTable: Table;
     this.authService.getUsersTable().subscribe({
@@ -145,14 +151,11 @@ export class RegisterComponent implements OnInit {
       },
       complete: () => {
         let users: User[] = usersTable.rows;
-        // check body valid
+        // check body validity
         let invalid = users.some((user: any) => {
           return user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME];
         });
         if (invalid) {
-          if (!this.multiDataControls[0].state.touched) {
-            this.multiDataControls[0].state.touched = true;
-          }
           this.registerForm.controls[AuKeysEnum.USERNAME].setErrors({duplicate: true});
           this.loading = false;
         } else {
@@ -161,13 +164,13 @@ export class RegisterComponent implements OnInit {
           usersTable.rows.push(body);
           this.authService.updateUsersTable(usersTable).subscribe({
             next: () => {
-              this.loading = false;
+              this.notifyService.success('Đăng ký tài khoản thành công!');
               this.router.navigate(['/auth/login']);
+              this.loading = false;
             }
           });
         }
       }
     });
-
   }
 }

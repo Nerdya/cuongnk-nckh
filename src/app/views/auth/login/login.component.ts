@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {LocalStorageService} from "../../../services/local-storage.service";
+import {SessionStorageService} from "../../../services/session-storage.service";
 import {Router} from "@angular/router";
 import {AuKeysEnum} from "../au-keys.enum";
 import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
 import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
-import {User} from "../../../shared/interfaces/common.interface";
+import {Table, User} from "../../../shared/interfaces/common.interface";
+import {AuthService} from "../../../services/auth.service";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-login',
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
         control: new FormControl(),
         dataType: DataTypeEnum.PASSWORD,
         prefixIcon: 'lock',
+        showPassword: false,
       },
       state: {},
     },
@@ -45,12 +48,14 @@ export class LoginComponent implements OnInit {
   isRequired = (validators: ValidationErrors[]) => {
     return validators.includes(Validators.required);
   }
-  remember = false;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
-    private localStorageService: LocalStorageService,
+    private authService: AuthService,
+    private sessionStorageService: SessionStorageService,
     private router: Router,
+    private notifyService: NotifyService,
   ) {
   }
 
@@ -68,44 +73,79 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
+    this.loading = true;
     this.multiDataControls.forEach(element => {
       if (this.loginForm.controls[element.code].errors && !element.state.touched) {
         element.state = Object.assign({}, element.state, {touched: true});
       }
+      if (!element.state.touched) {
+        element.state.touched = true;
+      }
     });
     if (!this.loginForm.valid) {
+      this.loading = false;
       return;
     }
-    let users: User[] = this.localStorageService.getItem('user') ?? [];
-    if (!users.length) {
-      alert('Không có người dùng trong hệ thống!');
-      return;
+    const formValue = this.loginForm.value;
+    let body: User = {
+      [AuKeysEnum.USERNAME]: formValue[AuKeysEnum.USERNAME],
+      [AuKeysEnum.PASSWORD]: formValue[AuKeysEnum.PASSWORD],
     }
-    let body = this.loginForm.value;
-    let valid = users.some((user: User) => {
-      if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
-        if (user[AuKeysEnum.PASSWORD] === body[AuKeysEnum.PASSWORD]) {
-          this.localStorageService.setItem('currentUser', user);
-          return true;
+
+    // get users table
+    let usersTable: Table;
+    this.authService.getUsersTable().subscribe({
+      next: (res: Table) => {
+        if (res) {
+          usersTable = res;
+        }
+      },
+      error: (e) => {
+        console.error(e);
+        this.loading = false;
+      },
+      complete: () => {
+        let users: User[] = usersTable.rows;
+        if (!users.length) {
+          this.notifyService.error('Không có người dùng trong hệ thống!');
+          return;
+        }
+        // check body validity
+        let invalid = true;
+        let usernameFound = users.some((user: any) => {
+          if (user[AuKeysEnum.USERNAME] === body[AuKeysEnum.USERNAME]) {
+            if (user[AuKeysEnum.PASSWORD] === body[AuKeysEnum.PASSWORD]) {
+              this.sessionStorageService.setItem('currentUser', user);
+              invalid = false;
+            } else {
+              this.loginForm.controls[AuKeysEnum.PASSWORD].setErrors({wrongPassword: true});
+            }
+            return true;
+          }
+          return false;
+        });
+        if (!usernameFound) {
+          this.loginForm.controls[AuKeysEnum.USERNAME].setErrors({notFound: true});
+        }
+        if (invalid) {
+          this.loading = false;
         } else {
-          this.loginForm.controls[AuKeysEnum.PASSWORD].setErrors(null);
-          this.loginForm.controls[AuKeysEnum.PASSWORD].setErrors({wrongPassword: true});
+          const currentUser = this.sessionStorageService.getItem('currentUser');
+          this.notifyService.success('Đăng nhập thành công!');
+          switch (currentUser.role) {
+            case 'admin':
+              this.router.navigate(['/admin']);
+              break;
+            default:
+              this.router.navigate(['/']);
+          }
+          this.loading = false;
         }
       }
-      return false;
     });
-    if (valid) {
-      const currentUser = this.localStorageService.getItem('currentUser');
-      switch(currentUser.role) {
-        case 'admin':
-          this.router.navigate(['/admin']);
-          break;
-        default:
-          this.router.navigate(['/']);
-      }
-    } else {
-      this.loginForm.controls[AuKeysEnum.USERNAME].setErrors(null);
-      this.loginForm.controls[AuKeysEnum.USERNAME].setErrors({notFound: true});
-    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.multiDataControls[1].options.showPassword = !this.multiDataControls[1].options.showPassword;
   }
 }

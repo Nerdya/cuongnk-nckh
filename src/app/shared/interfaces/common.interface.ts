@@ -9,9 +9,9 @@ export interface User {
   id?: string,
   username: string,
   password: string,
-  fullName: string,
-  email: string,
-  phoneNumber: string,
+  fullName?: string,
+  email?: string,
+  phoneNumber?: string,
   role?: string,
 }
 
