@@ -13,7 +13,7 @@
         </div>
         <ul class="nav-list">
           <li class="nav-item">
-            <a class="nav-item-wrapper" routerLink="/" nz-dropdown [nzDropdownMenu]="categoryMenu">
+            <a class="nav-item-wrapper" nz-dropdown [nzDropdownMenu]="categoryMenu">
               <span class="icon-nav-item" nz-icon nzType="appstore" nzTheme="outline"></span>
               <span class="label-nav-item">Danh mục</span>
             </a>
@@ -54,7 +54,7 @@
                 <li nz-menu-item (click)="getCurrentUser ? logout() : login()">
                   {{getCurrentUser ? "Đăng xuất" : "Đăng nhập"}}
                 </li>
-                <li nz-menu-item (click)="register()">Đăng ký</li>
+                <li nz-menu-item *ngIf="!getCurrentUser" (click)="register()">Đăng ký</li>
               </ul>
             </nz-dropdown-menu>
           </li>
