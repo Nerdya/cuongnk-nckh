@@ -1,4 +1,4 @@
-<div class="nckh-category-card">
+<div class="nckh-product-card">
   <nz-card [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
     <div nz-card-grid class="card-grid" *ngFor="let item of list">
       <div class="row">
@@ -12,8 +12,8 @@
           {{item.price | currencyFormat}}
         </div>
         <div class="col-12 d-grid gap-2">
-          <button type="button" class="btn btn-primary btn-sm" (click)="detail(item.product_id)">Xem chi tiết</button>
-          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addToCart(item.product_id)">Thêm vào giỏ hàng</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="detail(item.id)">Xem chi tiết</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="addToCart(item.id)">Thêm vào giỏ hàng</button>
         </div>
       </div>
     </div>

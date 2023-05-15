@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {Product} from "../../../../shared/interfaces/common.interface";
-import {LocalStorageService} from "../../../../services/local-storage.service";
-import {initialProducts} from "../../../../shared/constants/common.const";
+import {Product, Table} from "../../../../shared/interfaces/common.interface";
+import {UserService} from "../../../../services/user.service";
+import {NotifyService} from "../../../../services/notify.service";
 
 @Component({
   selector: 'app-smartphone',
@@ -11,20 +11,42 @@ import {initialProducts} from "../../../../shared/constants/common.const";
 export class SmartphoneComponent {
   products!: Product[];
   smartphones: Product[] = [];
+  loading = true;
 
   constructor(
-    private localStorageService: LocalStorageService,
+    private userService: UserService,
+    private notifyService: NotifyService,
   ) {
   }
 
   ngOnInit() {
-    if (!this.localStorageService.getItem('products')) {
-      this.localStorageService.setItem('products', initialProducts);
-    }
-    this.products = this.localStorageService.getItem('products');
-    this.products.forEach(product => {
-      if (product.category === 'smartphone') {
-        this.smartphones.push(product);
+    this.loading = true;
+
+    // get products table
+    let productsTable: Table;
+    this.userService.getProductsTable().subscribe({
+      next: (res: Table) => {
+        if (res) {
+          productsTable = res;
+        }
+      },
+      error: (e) => {
+        console.error(e);
+        this.loading = false;
+      },
+      complete: () => {
+        this.products = productsTable.rows;
+        if (!this.products.length) {
+          this.notifyService.error('Không có sản phẩm trong hệ thống!');
+          this.loading = false;
+          return;
+        }
+        this.products.forEach(product => {
+          if (product.category === 'laptop') {
+            this.smartphones.push(product);
+          }
+        });
+        this.loading = false;
       }
     });
   }

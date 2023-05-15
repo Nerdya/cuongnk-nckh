@@ -1,3 +1,5 @@
-<div class="nckh-category-laptop">
-  <app-category-card cardTitle="Laptop" [list]="laptops"></app-category-card>
-</div>
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <div class="nckh-product-laptop">
+    <app-product-card cardTitle="Laptop" [list]="laptops"></app-product-card>
+  </div>
+</nz-spin>

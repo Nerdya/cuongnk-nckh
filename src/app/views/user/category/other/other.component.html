@@ -1,3 +1,5 @@
-<div class="nckh-category-other">
-  <app-category-card cardTitle="Sản phẩm khác" [list]="others"></app-category-card>
-</div>
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <div class="nckh-product-other">
+    <app-product-card cardTitle="Sản phẩm khác" [list]="others"></app-product-card>
+  </div>
+</nz-spin>
