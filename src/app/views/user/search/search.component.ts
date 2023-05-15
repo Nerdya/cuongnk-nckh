@@ -10,9 +10,9 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  searchString = '';
+  private _searchString: string = 'initial value';
   products!: Product[];
-  searches: Product[] = [];
+  results: Product[] = [];
   loading = true;
 
   constructor(
@@ -20,12 +20,30 @@ export class SearchComponent implements OnInit {
     private userService: UserService,
     private notifyService: NotifyService,
   ) {
-    this.route.paramMap.subscribe(params => {
-      this.searchString = params.get('key') ?? '';
+    this.route.queryParams.subscribe(params => {
+      this.searchString = params['key'] ?? '';
     });
   }
 
+  set searchString(value: string) {
+    if (this._searchString !== value) {
+      const previousValue = this._searchString;
+      this._searchString = value;
+      console.log('Value changed from', previousValue, 'to', value);
+      // Perform any other actions based on the value change
+      this.getSearchResults();
+    }
+  }
+
+  get searchString(): string {
+    return this._searchString;
+  }
+
   ngOnInit() {
+    this.getSearchResults();
+  }
+
+  getSearchResults() {
     this.loading = true;
 
     // get products table
@@ -47,9 +65,11 @@ export class SearchComponent implements OnInit {
           this.loading = false;
           return;
         }
+        this.results = [];
         this.products.forEach(product => {
           if (product.name.includes(this.searchString)) {
-            this.searches.push(product);
+            console.log(product.name, this.searchString);
+            this.results.push(product);
           }
         });
         this.loading = false;
