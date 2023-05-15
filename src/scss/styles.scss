@@ -32,6 +32,10 @@ a {
   color: #cd1818 !important;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .control-wrapper {
   .control-label {
     margin-bottom: 5px;
@@ -313,8 +317,8 @@ a {
     padding: 0;
     color: white;
     background-color: black;
-    bottom: 0;
-    position: fixed;
+    //bottom: 0;
+    //position: fixed;
   }
 
   .app-footer {
@@ -324,7 +328,7 @@ a {
   }
 }
 
-.nckh-home {
+.nckh-home, .nckh-product-detail {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -337,7 +341,6 @@ a {
 
     .card-grid {
       width: 25%;
-      cursor: unset;
 
       .img-item {
         width: 100%;
