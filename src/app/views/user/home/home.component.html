@@ -1,7 +1,9 @@
-<div class="nckh-home">
-  <app-category-card cardTitle="Laptop" extra="Xem tất cả" [list]="laptops"></app-category-card>
-  <app-category-card cardTitle="Điện thoại" extra="Xem tất cả" [list]="smartphones"></app-category-card>
-  <app-category-card cardTitle="Smart TV" extra="Xem tất cả" [list]="smartTVs"></app-category-card>
-  <app-category-card cardTitle="Tai nghe" extra="Xem tất cả" [list]="headphones"></app-category-card>
-  <app-category-card cardTitle="Sản phẩm khác" extra="Xem tất cả" [list]="others"></app-category-card>
-</div>
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <div class="nckh-home">
+    <app-product-card cardTitle="Laptop" extra="Xem tất cả" [list]="laptops"></app-product-card>
+    <app-product-card cardTitle="Điện thoại" extra="Xem tất cả" [list]="smartphones"></app-product-card>
+    <app-product-card cardTitle="Smart TV" extra="Xem tất cả" [list]="smartTVs"></app-product-card>
+    <app-product-card cardTitle="Tai nghe" extra="Xem tất cả" [list]="headphones"></app-product-card>
+    <app-product-card cardTitle="Sản phẩm khác" extra="Xem tất cả" [list]="others"></app-product-card>
+  </div>
+</nz-spin>

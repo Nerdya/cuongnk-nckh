@@ -16,7 +16,7 @@ export interface User {
 }
 
 export interface Product {
-  product_id: number,
+  id: number,
   name: string,
   image: string,
   price: number,

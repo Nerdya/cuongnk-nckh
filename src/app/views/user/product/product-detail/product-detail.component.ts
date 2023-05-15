@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {LocalStorageService} from "../../../../services/local-storage.service";
-import {CartItem, Product} from "../../../../shared/interfaces/common.interface";
+import {CartItem, Product, Table} from "../../../../shared/interfaces/common.interface";
+import {UserService} from "../../../../services/user.service";
+import {NotifyService} from "../../../../services/notify.service";
+import {SessionStorageService} from "../../../../services/session-storage.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -10,18 +12,22 @@ import {CartItem, Product} from "../../../../shared/interfaces/common.interface"
 })
 export class ProductDetailComponent implements OnInit {
   id: number = 0;
+  products!: Product[];
   product: Product = {
-    product_id: 0,
+    id: 0,
     name: '',
     image: '',
     price: 0,
     category: '',
     description: ''
   }
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
-    private localStorageService: LocalStorageService,
+    private userService: UserService,
+    private notifyService: NotifyService,
+    private sessionStorageService: SessionStorageService,
   ) {
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'));
@@ -29,16 +35,41 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const products = this.localStorageService.getItem('products') ?? [];
-    products.some((product: Product) => {
-      if (product.product_id === this.id) {
-        this.product = product;
+    this.loading = true;
+
+    // get products table
+    let productsTable: Table;
+    this.userService.getProductsTable().subscribe({
+      next: (res: Table) => {
+        if (res) {
+          productsTable = res;
+        }
+      },
+      error: (e) => {
+        console.error(e);
+        this.loading = false;
+      },
+      complete: () => {
+        this.products = productsTable.rows;
+        if (!this.products.length) {
+          this.notifyService.error('Không có sản phẩm trong hệ thống!');
+          this.loading = false;
+          return;
+        }
+        this.products.some((product: Product) => {
+          if (product.id === this.id) {
+            this.product = product;
+            return true;
+          }
+          return false;
+        });
+        this.loading = false;
       }
     });
   }
 
   addToCart(id: number) {
-    let cartItems = this.localStorageService.getItem('cartItems') ?? [];
+    let cartItems = this.sessionStorageService.getItem('cartItems') ?? [];
     const exist = cartItems.some((cartItem: CartItem) => {
       if (cartItem.id === id) {
         cartItem.amount++;
@@ -48,7 +79,7 @@ export class ProductDetailComponent implements OnInit {
     });
     if (!exist) {
       const cartItem: CartItem = {
-        id: this.product.product_id,
+        id: this.product.id,
         name: this.product.name,
         image: this.product.image,
         price: this.product.price,
@@ -56,6 +87,6 @@ export class ProductDetailComponent implements OnInit {
       };
       cartItems.push(cartItem);
     }
-    this.localStorageService.setItem('cartItems', cartItems);
+    this.sessionStorageService.setItem('cartItems', cartItems);
   }
 }

@@ -15,8 +15,9 @@ import {NzCardModule} from 'ng-zorro-antd/card';
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 import {NzMessageModule} from "ng-zorro-antd/message";
+import {NzSpinModule} from "ng-zorro-antd/spin";
 
-import {CategoryCardComponent} from '../components/category-card/category-card.component';
+import {ProductCardComponent} from '../components/product-card/product-card.component';
 import {MultiDataControlComponent} from "../components/multi-data-control/multi-data-control.component";
 
 import {CurrencyFormatPipe} from "./pipes/currency-format.pipe";
@@ -41,9 +42,10 @@ import {CurrencyFormatPipe} from "./pipes/currency-format.pipe";
     NzDatePickerModule,
     NzDropDownModule,
     NzMessageModule,
+    NzSpinModule,
   ],
   declarations: [
-    CategoryCardComponent,
+    ProductCardComponent,
     MultiDataControlComponent,
 
     CurrencyFormatPipe,
@@ -65,8 +67,9 @@ import {CurrencyFormatPipe} from "./pipes/currency-format.pipe";
     NzDatePickerModule,
     NzDropDownModule,
     NzMessageModule,
+    NzSpinModule,
 
-    CategoryCardComponent,
+    ProductCardComponent,
     MultiDataControlComponent,
 
     CurrencyFormatPipe,

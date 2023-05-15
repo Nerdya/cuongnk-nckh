@@ -3,11 +3,11 @@ import {Router} from '@angular/router';
 import {Product} from "../../shared/interfaces/common.interface";
 
 @Component({
-  selector: 'app-category-card',
-  templateUrl: './category-card.component.html',
-  styleUrls: ['./category-card.component.scss']
+  selector: 'app-product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss']
 })
-export class CategoryCardComponent {
+export class ProductCardComponent {
   @Input() cardTitle = 'Card title';
   @Input() extra = '';
   @Input() extraLink = '/';

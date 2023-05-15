@@ -1,3 +1,5 @@
-<div class="nckh-category-headphone">
-  <app-category-card cardTitle="Tai nghe" [list]="headphones"></app-category-card>
-</div>
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <div class="nckh-product-headphone">
+    <app-product-card cardTitle="Tai nghe" [list]="headphones"></app-product-card>
+  </div>
+</nz-spin>

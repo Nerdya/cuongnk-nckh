@@ -1,3 +1,5 @@
-<div class="nckh-category-smartphone">
-  <app-category-card cardTitle="Điện thoại" [list]="smartphones"></app-category-card>
-</div>
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <div class="nckh-product-smartphone">
+    <app-product-card cardTitle="Điện thoại" [list]="smartphones"></app-product-card>
+  </div>
+</nz-spin>

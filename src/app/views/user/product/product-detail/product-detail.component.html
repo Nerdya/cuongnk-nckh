@@ -1,42 +1,44 @@
-<div class="nckh-product-detail">
-  <nz-card>
-    <div class="row">
-      <div class="col-4">
-        <div class="row">
-          <div class="img-item-wrapper col-12">
-            <img class="img-item" [src]="product.image" alt=""/>
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <div class="nckh-product-detail">
+    <nz-card>
+      <div class="row">
+        <div class="col-4">
+          <div class="row">
+            <div class="img-item-wrapper col-12">
+              <img class="img-item" [src]="product.image" alt=""/>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">
+              <a routerLink="/">< Trở về trang chủ</a>
+            </div>
+            <div class="col-12">
+              <h2 class="fw-bold">{{product.name}}</h2>
+            </div>
+            <div class="col-12">
+              <h4 class="fw-bold text-primary">{{product.price | currencyFormat}}</h4>
+            </div>
+            <div class="col-12">
+              <hr class="horizontal-spacer mt-4 mb-4">
+            </div>
+            <div class="col-12">
+              <p>{{product.description}}</p>
+            </div>
+            <div class="col-12">
+              <hr class="horizontal-spacer mt-4 mb-4">
+            </div>
+            <div class="col-12 d-flex gap-4">
+  <!--            <button type="button" class="btn btn-primary w-50 fw-bold">Mua ngay</button>-->
+              <button type="button"
+                      class="btn btn-outline-secondary w-50 fw-bold"
+                      (click)="addToCart(product.id)"
+              >Thêm vào giỏ hàng</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-8">
-        <div class="row">
-          <div class="col-12">
-            <a routerLink="/">< Trở về trang chủ</a>
-          </div>
-          <div class="col-12">
-            <h2 class="fw-bold">{{product.name}}</h2>
-          </div>
-          <div class="col-12">
-            <h4 class="fw-bold text-primary">{{product.price | currencyFormat}}</h4>
-          </div>
-          <div class="col-12">
-            <hr class="horizontal-spacer mt-4 mb-4">
-          </div>
-          <div class="col-12">
-            <p>{{product.description}}</p>
-          </div>
-          <div class="col-12">
-            <hr class="horizontal-spacer mt-4 mb-4">
-          </div>
-          <div class="col-12 d-flex gap-4">
-<!--            <button type="button" class="btn btn-primary w-50 fw-bold">Mua ngay</button>-->
-            <button type="button"
-                    class="btn btn-outline-secondary w-50 fw-bold"
-                    (click)="addToCart(product.product_id)"
-            >Thêm vào giỏ hàng</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nz-card>
-</div>
+    </nz-card>
+  </div>
+</nz-spin>
