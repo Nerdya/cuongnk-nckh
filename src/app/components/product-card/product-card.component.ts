@@ -30,7 +30,7 @@ export class ProductCardComponent {
     let cartItems = this.sessionStorageService.getItem('cartItems') ?? [];
     const exist = cartItems.some((cartItem: CartItem) => {
       if (cartItem.id === item.id) {
-        cartItem.amount++;
+        cartItem.quantity++;
         return true;
       }
       return false;
@@ -41,7 +41,7 @@ export class ProductCardComponent {
         name: item.name,
         image: item.image,
         price: item.price,
-        amount: 1,
+        quantity: 1,
       };
       cartItems.push(cartItem);
     }

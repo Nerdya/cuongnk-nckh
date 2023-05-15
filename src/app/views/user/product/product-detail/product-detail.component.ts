@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CartItem, Product, Table} from "../../../../shared/interfaces/common.interface";
 import {UserService} from "../../../../services/user.service";
 import {NotifyService} from "../../../../services/notify.service";
@@ -26,6 +26,7 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private notifyService: NotifyService,
     private sessionStorageService: SessionStorageService,
@@ -102,7 +103,7 @@ export class ProductDetailComponent implements OnInit {
     let cartItems = this.sessionStorageService.getItem('cartItems') ?? [];
     const exist = cartItems.some((cartItem: CartItem) => {
       if (cartItem.id === item.id) {
-        cartItem.amount++;
+        cartItem.quantity++;
         return true;
       }
       return false;
@@ -113,11 +114,16 @@ export class ProductDetailComponent implements OnInit {
         name: item.name,
         image: item.image,
         price: item.price,
-        amount: 1,
+        quantity: 1,
       };
       cartItems.push(cartItem);
     }
     this.sessionStorageService.setItem('cartItems', cartItems);
     this.notifyService.success('Đã thêm sản phẩm vào giỏ hàng');
+  }
+
+  purchase(item: Product) {
+    this.addToCart(item);
+    this.router.navigate(['/cart']);
   }
 }
