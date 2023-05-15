@@ -27,9 +27,7 @@ export class SearchComponent implements OnInit {
 
   set searchString(value: string) {
     if (this._searchString !== value) {
-      const previousValue = this._searchString;
       this._searchString = value;
-      console.log('Value changed from', previousValue, 'to', value);
       // Perform any other actions based on the value change
       this.getSearchResults();
     }
@@ -68,7 +66,6 @@ export class SearchComponent implements OnInit {
         this.results = [];
         this.products.forEach(product => {
           if (product.name.includes(this.searchString)) {
-            console.log(product.name, this.searchString);
             this.results.push(product);
           }
         });
