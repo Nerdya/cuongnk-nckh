@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  private _searchString: string = 'initial value';
+  private _searchString: string = '';
   products!: Product[];
   results: Product[] = [];
   loading = true;

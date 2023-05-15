@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {MultiDataControl} from "../../../shared/interfaces/multi-data-control.interface";
-import {UKeysEnum} from "../u-keys.enum";
-import {DataTypeEnum} from "../../../shared/enums/data-type.enum";
-import {LocalStorageService} from "../../../services/local-storage.service";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {SessionStorageService} from "../../../services/session-storage.service";
+import {CartItem} from "../../../shared/interfaces/common.interface";
 
 @Component({
   selector: 'app-cart',
@@ -12,71 +10,43 @@ import {LocalStorageService} from "../../../services/local-storage.service";
 })
 export class CartComponent {
   cartForm!: FormGroup;
-  multiDataControls: MultiDataControl[] = [
-    {
-      code: UKeysEnum.EMAIL,
-      value: null,
-      validators: [Validators.required, Validators.email, Validators.maxLength(255)],
-      options: {
-        name: 'Email',
-        control: new FormControl(),
-        dataType: DataTypeEnum.STRING,
-      },
-      state: {},
-    },
-    {
-      code: UKeysEnum.CONTENT,
-      value: null,
-      validators: [Validators.required],
-      options: {
-        name: 'Nội dung phản hồi',
-        control: new FormControl(),
-        dataType: DataTypeEnum.TEXTAREA,
-      },
-      state: {},
-    },
-  ];
-  isRequired = (validators: ValidationErrors[]) => {
-    return validators.includes(Validators.required);
-  }
-  remember = false;
 
   constructor(
     private fb: FormBuilder,
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
   ) {
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.getCartItems();
   }
 
   initForm(): void {
-    let formDataObj: any = {};
-    this.multiDataControls.forEach(element => {
-      element.options.control = this.fb.control(element.value, Validators.compose(element.validators));
-      formDataObj[element.code] = element.options.control;
+    this.cartForm = this.fb.group({
+      items: this.fb.array([])
     });
-    this.cartForm = this.fb.group(formDataObj);
+  }
+
+  get itemsFormArray(): FormArray {
+    return this.cartForm.get('items') as FormArray;
+  }
+
+  getCartItems() {
+    const cartItems = this.sessionStorageService.getItem('cartItems') ?? [];
+    cartItems.forEach((item: CartItem) => {
+      this.itemsFormArray.push(this.createCartItem());
+    });
+  }
+
+  createCartItem(): FormGroup {
+    return this.fb.group({
+      name: ['Default Name'],
+      price: ['Default Price'],
+      quantity: ['Default Quantity']
+    });
   }
 
   submit(): void {
-    this.multiDataControls.forEach(element => {
-      if (this.cartForm.controls[element.code].errors && !element.state.touched) {
-        element.state = Object.assign({}, element.state, {touched: true});
-      }
-    });
-    if (!this.cartForm.valid) {
-      return;
-    }
-    let body = this.cartForm.value;
-    let feedbacks: any[] = this.localStorageService.getItem('feedbacks') ?? [];
-    feedbacks.push(body);
-    this.localStorageService.setItem('feedbacks', feedbacks);
-    alert('Gửi phản hồi thành công!');
-    this.cartForm.controls[UKeysEnum.EMAIL].patchValue(null);
-    this.cartForm.controls[UKeysEnum.CONTENT].patchValue(null);
-    this.cartForm.controls[UKeysEnum.EMAIL].setErrors(null);
-    this.cartForm.controls[UKeysEnum.CONTENT].setErrors(null);
   }
 }

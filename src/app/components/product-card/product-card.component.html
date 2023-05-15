@@ -1,6 +1,6 @@
 <div class="nckh-product-card">
   <nz-card [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
-    <div nz-card-grid class="card-grid" *ngFor="let item of list">
+    <div nz-card-grid class="card-grid" *ngFor="let item of list" (click)="detail(item.id)">
       <div class="row">
         <div class="col-12 mb-2">
           <img class="img-item" [src]="item.image" alt=""/>

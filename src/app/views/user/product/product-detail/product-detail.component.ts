@@ -11,8 +11,9 @@ import {SessionStorageService} from "../../../../services/session-storage.servic
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  id: number = 0;
+  private _id: number = 0;
   products!: Product[];
+  otherProducts: Product[] = [];
   product: Product = {
     id: 0,
     name: '',
@@ -34,7 +35,23 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  set id(value: number) {
+    if (this._id !== value) {
+      this._id = value;
+      // Perform any other actions based on the value change
+      this.getProductDetail();
+    }
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
   ngOnInit(): void {
+    this.getProductDetail();
+  }
+
+  getProductDetail() {
     this.loading = true;
 
     // get products table
@@ -56,6 +73,19 @@ export class ProductDetailComponent implements OnInit {
           this.loading = false;
           return;
         }
+        this.otherProducts = [];
+        let itemCount = 4;
+        this.products.some((product: Product) => {
+          if (itemCount > 0) {
+            if (product.id !== this.id) {
+              this.otherProducts.push(product);
+              itemCount--;
+            }
+          } else {
+            return true;
+          }
+          return false;
+        });
         this.products.some((product: Product) => {
           if (product.id === this.id) {
             this.product = product;
