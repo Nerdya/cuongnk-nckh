@@ -68,10 +68,10 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  addToCart(id: number) {
+  addToCart(item: Product) {
     let cartItems = this.sessionStorageService.getItem('cartItems') ?? [];
     const exist = cartItems.some((cartItem: CartItem) => {
-      if (cartItem.id === id) {
+      if (cartItem.id === item.id) {
         cartItem.amount++;
         return true;
       }
@@ -79,14 +79,15 @@ export class ProductDetailComponent implements OnInit {
     });
     if (!exist) {
       const cartItem: CartItem = {
-        id: this.product.id,
-        name: this.product.name,
-        image: this.product.image,
-        price: this.product.price,
+        id: item.id,
+        name: item.name,
+        image: item.image,
+        price: item.price,
         amount: 1,
       };
       cartItems.push(cartItem);
     }
     this.sessionStorageService.setItem('cartItems', cartItems);
+    this.notifyService.success('Đã thêm sản phẩm vào giỏ hàng');
   }
 }
