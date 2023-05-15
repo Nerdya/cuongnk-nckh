@@ -2,23 +2,55 @@
   <nz-card nzTitle="Giỏ hàng">
     <div class="row">
       <div class="col-lg-8 col-12">
-        <nz-card>
-          <form nz-form [formGroup]="cartForm" class="cuongnk-form" (ngSubmit)="submit()">
-            <div formArrayName="items">
-              <div *ngFor="let item of itemsFormArray.controls; let i = index">
-                <div [formGroupName]="i">
-                  <p>Item Name: {{ item.get('name')?.value }}</p>
-                  <p>Price: {{ item.get('price')?.value }}</p>
-                  <p>Quantity: {{ item.get('quantity')?.value }}</p>
+        <form nz-form [formGroup]="cartForm" class="cuongnk-form">
+          <div class="nckh-cart-items" formArrayName="items">
+            <div *ngFor="let item of itemsFormArray.controls; let i = index">
+              <nz-card [formGroupName]="i">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <img class="img-item" [src]="item.get('image')?.value" alt=""/>
+                  </div>
+                  <div class="col-3">
+                    <span class="fw-bold">{{item.get('name')?.value}}</span>
+                  </div>
+                  <div class="col-2">
+                    <span class="fw-bold">{{item.get('price')?.value | currencyFormat}}</span>
+                  </div>
+                  <div class="col-3">
+<!--                    <div class="w-100 mb-1 text-center">Số lượng</div>-->
+                    <div class="w-100 d-flex">
+                      <button nz-button nzType="default" (click)="subtract(item.get('id')?.value)">
+                        <span nz-icon nzType="minus"></span>
+                      </button>
+                      <nz-input-number style="width: auto" [nzMin]="1" [nzMax]="10" [nzStep]="1" nzReadOnly formControlName="quantity"></nz-input-number>
+                      <button nz-button nzType="default" (click)="add(item.get('id')?.value)">
+                        <span nz-icon nzType="plus"></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <button nz-button nzType="primary" nzShape="circle" nzDanger (click)="removeFromCart(item.get('id')?.value)">
+                      <span nz-icon nzType="minus"></span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </nz-card>
             </div>
-          </form>
-        </nz-card>
+          </div>
+        </form>
       </div>
       <div class="col-lg-4 col-12">
         <nz-card>
-          <h2>Thanh toán</h2>
+          <p class="fw-bold">Tổng giá trị:
+            <span>{{totalValue | currencyFormat}}</span>
+          </p>
+          <p class="fw-bold">Giảm giá:
+            <span>{{discount | currencyFormat}}</span>
+          </p>
+          <p class="fw-bold">Tổng thanh toán:
+            <span class="text-primary">{{totalPayment | currencyFormat}}</span>
+          </p>
+          <button type="button" class="btn btn-primary w-100 fw-bold" (click)="submit()">Thanh toán</button>
         </nz-card>
       </div>
     </div>

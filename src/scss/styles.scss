@@ -13,6 +13,10 @@ a {
   vertical-align: 0;
 }
 
+.ant-input-number-input {
+  text-align: center;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #cd1818;
@@ -34,6 +38,10 @@ a {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.z-index-1000 {
+  z-index: 1000;
 }
 
 .control-wrapper {
@@ -363,7 +371,9 @@ a {
       .img-item {
         width: 100%;
         height: auto;
+        aspect-ratio: 1/1;
         border-radius: 4px;
+        object-fit: contain;
       }
     }
 
@@ -377,5 +387,20 @@ a {
       border-top: 2px dotted #000;
       background: transparent;
     }
+  }
+}
+
+.nckh-cart-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .img-item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+    object-fit: contain;
   }
 }
