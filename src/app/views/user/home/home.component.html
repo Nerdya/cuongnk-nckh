@@ -1,9 +1,9 @@
-<nz-spin [nzSpinning]="loading" nzSize="large">
+<nz-spin [nzSpinning]="loading" nzSize="large" nzTip="Đang tải...">
   <div class="nckh-home">
-    <app-product-card cardTitle="Laptop" extra="Xem tất cả" [list]="laptops"></app-product-card>
-    <app-product-card cardTitle="Điện thoại" extra="Xem tất cả" [list]="smartphones"></app-product-card>
-    <app-product-card cardTitle="Smart TV" extra="Xem tất cả" [list]="smartTVs"></app-product-card>
-    <app-product-card cardTitle="Tai nghe" extra="Xem tất cả" [list]="headphones"></app-product-card>
-    <app-product-card cardTitle="Sản phẩm khác" extra="Xem tất cả" [list]="others"></app-product-card>
+    <app-product-card cardTitle="Laptop" extra="Xem tất cả" extraLink="/category/laptop" [list]="laptops"></app-product-card>
+    <app-product-card cardTitle="Điện thoại" extra="Xem tất cả" extraLink="/category/smartphone" [list]="smartphones"></app-product-card>
+    <app-product-card cardTitle="Smart TV" extra="Xem tất cả" extraLink="/category/smart-tv" [list]="smartTVs"></app-product-card>
+    <app-product-card cardTitle="Tai nghe" extra="Xem tất cả" extraLink="/category/headphone" [list]="headphones"></app-product-card>
+    <app-product-card cardTitle="Sản phẩm khác" extra="Xem tất cả" extraLink="/category/other" [list]="others"></app-product-card>
   </div>
 </nz-spin>

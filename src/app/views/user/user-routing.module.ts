@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
   },
   {
+    path: 'search',
+    component: UserComponent,
+    loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+  },
+  {
     path: '**',
     redirectTo: '../'
   }

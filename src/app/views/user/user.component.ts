@@ -8,6 +8,7 @@ import {SessionStorageService} from "../../services/session-storage.service";
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
+  searchString = '';
 
   constructor(
     private sessionStorageService: SessionStorageService,
@@ -34,5 +35,9 @@ export class UserComponent {
 
   register() {
     this.router.navigate(['/auth/register']);
+  }
+
+  search() {
+    this.router.navigate(['/search'], {queryParams: {key: this.searchString}});
   }
 }
