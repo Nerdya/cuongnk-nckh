@@ -65,7 +65,7 @@ export class SearchComponent implements OnInit {
         }
         this.results = [];
         this.products.forEach(product => {
-          if (product.name.includes(this.searchString)) {
+          if (product.name.toLowerCase().includes(this.searchString.toLowerCase())) {
             this.results.push(product);
           }
         });
