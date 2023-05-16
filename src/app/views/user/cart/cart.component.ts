@@ -76,8 +76,8 @@ export class CartComponent {
       total += (item.price * item.quantity);
     });
     this.totalValue = total;
-    this.discount = - (this.totalValue / 100);
-    this.totalPayment = this.totalValue + this.discount;
+    this.discount = (this.totalValue / 100);
+    this.totalPayment = this.totalValue - this.discount;
   }
 
   subtract(id: number) {
